@@ -1,6 +1,6 @@
 baseURL = "https://maeka.com.br"
 languageCode = "en-us"
-title = "MAEKA WEB STRATEGY, SEO & TECH STUFF"
+title = "MAEKA WEB STRATEGY"
 theme = "ink-free"
 pagination.pagerSize = 5
 
