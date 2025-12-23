@@ -2,7 +2,7 @@ name: Deploy Hugo to Linode
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -19,24 +19,17 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-      
+
           echo "${{ secrets.LINODE_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-      
-          # adiciona a fingerprint do servidor no known_hosts
+
+          echo -e "Host *\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes\n" >> ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
           ssh-keyscan -H ${{ secrets.LINODE_HOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
-      - name: Deploy (pull + build + rsync)
+      - name: Deploy (server script)
         run: |
-          ssh deploy@${{ secrets.LINODE_HOST }} 'bash -lc "bash /srv/hugo/maeka.com.br/deploy.sh"'
-
-            set -euo pipefail
-            cd /srv/hugo/maeka.com.br/repo
-            git pull
-            git submodule update --init --recursive
-            hugo --minify
-            rsync -av --delete public/ /var/www/maeka.com.br/
-            sudo /usr/bin/systemctl reload nginx
-          '
-
+          ssh -o StrictHostKeyChecking=yes ${{ secrets.LINODE_USER }}@${{ secrets.LINODE_HOST }} \
+            'bash -lc "bash /srv/hugo/maeka.com.br/deploy.sh"'
