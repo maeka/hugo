@@ -19,13 +19,18 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+      
           echo "${{ secrets.LINODE_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+      
+          # adiciona a fingerprint do servidor no known_hosts
           ssh-keyscan -H ${{ secrets.LINODE_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy (pull + build + rsync)
         run: |
-          ssh -o StrictHostKeyChecking=yes ${{ secrets.LINODE_USER }}@${{ secrets.LINODE_HOST }} '
+          ssh deploy@${{ secrets.LINODE_HOST }} 'bash -lc "bash /srv/hugo/maeka.com.br/deploy.sh"'
+
             set -euo pipefail
             cd /srv/hugo/maeka.com.br/repo
             git pull
