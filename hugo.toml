@@ -12,7 +12,7 @@ copyright = "© Copyright notice"
   posts = "/:year/:month/:title"
 
 [params]
-	subtitle = "The great miscelaneous from [Ricardo Maekawa](https://www.linkedin.com/in/maeka/)'s world"
+	subtitle = "Mess is the order you can't understand. [Ricardo Maekawa](https://www.linkedin.com/in/maeka/) has a website."
 
 	# Optional 64x64 avatar image.
 	#avatar = "https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg"
