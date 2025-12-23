@@ -80,12 +80,12 @@ weight = 4
 [[params.social]]
 name = "Github"
 icon = "github"
-url = "https://github.com/chollinger93/"
+url = "https://github.com/maeka"
 
 [[params.social]]
 name = "Twitter"
 icon = "twitter"
-url = "https://twitter.com/chollinger93/"
+url = "https://x.com/logsdebusca"
 
 [[params.social]]
 name = "RSS"
