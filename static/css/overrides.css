@@ -646,6 +646,7 @@ nav.breadcrumbs,
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  margin-bottom: 10px;
 }
 
 .site-brand__logo{
