@@ -4,7 +4,6 @@ date: 2025-12-27T10:00:00
 type: "page"
 ---
 
-![Ricardo Maekawa](/img/ricardo-maekawa.jpeg)
 
 # Hello, I’m Ricardo Maekawa
 
