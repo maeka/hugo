@@ -1352,7 +1352,7 @@ html:not(.dark) .site-brand__title{color:#111!important;}
 
 :root{
   --brand-gap: 14px;
-  --brand-logo: 80px;
+  --brand-logo: 100px;
 }
 @media (max-width: 640px){
   :root{ --brand-logo: 46px; --brand-gap: 12px; }
@@ -1563,4 +1563,30 @@ img.post-page__authorAvatar {
 
   display: inline-block !important;
   vertical-align: middle !important;
+}
+
+
+/* HEADER – alinhar ícones sociais verticalmente ao centro do header-top */
+.header-top,
+.site-description {
+  display: flex;
+  align-items: center;
+}
+
+/* garante que o bloco social não empurre para cima/baixo */
+.site-description {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* lista de ícones */
+.nav.social ul.flat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav.social {
+  position: relative;
+  top: -1px; /* ajuste fino opcional */
 }
