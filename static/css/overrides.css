@@ -963,3 +963,115 @@ html:not(.dark) .header > nav.nav{
   }
 }
 
+/* =========================================================
+   MOBILE: header + post cards (thumbs small on the right)
+   ========================================================= */
+@media (max-width: 640px) {
+
+  /* ---------- HEADER (logo + title + subtitle) ---------- */
+
+  /* garante que logo + textos fiquem na mesma “linha” */
+  .site-title .site-brand,
+  .site-title a.site-brand {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 10px;
+    align-items: center;
+  }
+
+  /* logo menor no mobile (mas ainda forte) */
+  .site-brand__logo {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 999px !important;
+  }
+
+  /* título menor e com quebra controlada */
+  .site-brand__title {
+    font-size: 1.05rem !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em;
+    display: block;
+    max-width: 100%;
+  }
+
+  /* subtitle COLADO e alinhado à esquerda do title (coluna 2) */
+  .site-description,
+  .site-subtitle {
+    margin-top: 2px !important;
+  }
+
+  .site-subtitle p,
+  .site-description p {
+    font-size: 0.85rem !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* evita “empilhar” demais o header */
+  .header {
+    padding-top: 8px;
+  }
+
+
+  /* ---------- HOME LIST: thumbs pequenas à direita ---------- */
+
+  /* seu card precisa ficar em 2 colunas no mobile */
+  .post-card,
+  .post-card__inner,
+  .post {
+    display: grid;
+    grid-template-columns: 1fr 92px;
+    column-gap: 12px;
+    align-items: start;
+  }
+
+  /* thumb sempre à direita, pequena */
+  .post-card__image,
+  .post-card__thumb,
+  .post-card__thumbnail,
+  .post-card__media {
+    width: 92px !important;
+    height: 64px !important;
+    justify-self: end;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+
+  .post-card__image img,
+  .post-card__thumb img,
+  .post-card__thumbnail img,
+  .post-card__media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
+  }
+
+  /* texto fica na coluna esquerda */
+  .post-card__content,
+  .post-card__body,
+  .post-card__text {
+    grid-column: 1;
+  }
+
+  /* thumb na coluna direita */
+  .post-card__image,
+  .post-card__thumb,
+  .post-card__thumbnail,
+  .post-card__media {
+    grid-column: 2;
+  }
+
+  /* tipografia do card no mobile */
+  .post-card__title {
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .post-card__description {
+    font-size: 0.9rem !important;
+    line-height: 1.35 !important;
+  }
+}
