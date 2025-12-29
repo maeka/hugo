@@ -1,35 +1,13 @@
-{{- $authorName := or .Params.author .Site.Params.author.name .Site.Params.author -}}
-{{- $authorSlug := urlize $authorName -}}
-{{- $authorURL := printf "/author/%s/" $authorSlug | relLangURL -}}
-{{- $avatar := or .Site.Params.author.avatar .Site.Params.Avatar -}}
-{{- $date := .Date -}}
-{{- $words := .WordCount -}}
-{{- $reading := .ReadingTime -}}
-
+{{/* layouts/partials/post_meta_inline.html */}}
 <div class="post-page__meta">
-
-  {{ if $authorName }}
-    <a href="{{ relLangURL "about/" }}" class="post-page__author">
-      <img class="post-page__authorAvatar" src="{{ $avatar | relURL }}" alt="{{ $authorName }}" loading="lazy">
-      <span class="post-page__authorName">{{ $authorName }}</span>
-    </a>
-  {{ end }}
-
-  {{ if $date }}
-    <span class="post-page__metaSep">•</span>
-    <time class="post-page__metaItem" datetime="{{ $date.Format "2006-01-02" }}">
-      {{ $date.Format "02 Jan 2006" }}
-    </time>
-  {{ end }}
-
-  {{ if gt $words 0 }}
-    <span class="post-page__metaSep">•</span>
-    <span class="post-page__metaItem">{{ $words }} words</span>
-  {{ end }}
-
-  {{ if gt $reading 0 }}
-    <span class="post-page__metaSep">•</span>
-    <span class="post-page__metaItem">{{ $reading }} min read</span>
-  {{ end }}
-
+  <a class="post-page__author" href="{{ relLangURL "about/" }}">
+    <img class="post-page__authorAvatar" src="{{ relURL "img/ricardo-maekawa.jpeg" }}" alt="Ricardo Maekawa" loading="lazy">
+    <span class="post-page__authorName">Ricardo Maekawa</span>
+  </a>
+  <span class="post-page__metaSep">·</span>
+  <time class="post-page__metaItem" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+  <span class="post-page__metaSep">·</span>
+  <span class="post-page__metaItem">{{ .WordCount }} {{ i18n "words" | default "words" }}</span>
+  <span class="post-page__metaSep">·</span>
+  <span class="post-page__metaItem">{{ printf "%d min read" .ReadingTime }}</span>
 </div>

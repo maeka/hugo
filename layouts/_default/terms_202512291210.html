@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html {{- if (eq .Site.Params.mode "dark" ) -}}class="dark" {{ end }}>
+{{ partial "header.html" . }}
+
+<body>
+  <div class="container wrapper tags">
+    {{ partial "head.html" . }}
+
+    {{ if .Site.Params.statisticsEnabled }}
+      {{ partial "statistics.html" . }}
+    {{ end }}
+
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    {{/* Tag cloud (based on your original terms.html) */}}
+    {{ $biggest := 1 }}
+    {{ $smallest := 1 }}
+    {{ $max := 3 }}
+    {{ $min := 1 }}
+
+    {{ range $key, $value := .Data.Terms.ByCount }}
+      {{ if gt $value.Count $biggest }}{{ $biggest = $value.Count }}{{ end }}
+      {{ if lt $value.Count $smallest }}{{ $smallest = $value.Count }}{{ end }}
+    {{ end }}
+
+    <div class="tag-cloud">
+      {{ range $key, $value := .Data.Terms.ByCount }}
+        {{ $size := (add (mul (div (float $value.Count) (float $biggest)) (sub $max $min)) $min) }}
+        {{ $size := (cond (eq $biggest $smallest) $min $size) }}
+        <a style="font-size: {{ $size }}rem" href="{{ relLangURL (printf "tags/%s/" $key) }}">{{ $key }}</a>
+      {{ end }}
+    </div>
+  </div>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

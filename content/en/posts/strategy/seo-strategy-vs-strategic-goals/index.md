@@ -1,6 +1,7 @@
 ---
 title: "SEO Strategy vs. SEO Strategic Goals"
 slug: "seo-strategy-vs-strategic-goals"
+translationKey: "seo-strategy-vs-goals"
 date: 2025-12-27
 draft: false
 summary: "SEO goals define where you need to show up. SEO strategy defines the plan to get there—by mapping intent to templates using a simple zoom framework."
@@ -10,8 +11,8 @@ tags:
   - information-architecture
   - user-intent
 images:
-  - seo-strategy-ricardo-maekawa-chart.jpeg
   - seo-strategy_og_en.png
+  - seo-strategy-ricardo-maekawa-chart.jpeg
 ---
 
 ## SEO Strategy vs. SEO Strategic Goals

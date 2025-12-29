@@ -3,16 +3,16 @@ title: "In search of the exact match: when search and page truly align"
 date: 2025-12-27
 slug: "exact-match-search-intent"
 description: "Why the perfect alignment between search intent and landing pages defines SEO success — and what to do when that match fails."
+translationKey: "perfect-match"
 tags:
   - seo
   - strategy
   - search-intent
   - information-architecture
 images:
-  - exact-match-diagram.jpg
+  - exact-match-diagram.jpeg
 ---
 
-![Exact match between search and landing page](./exact-match-diagram.jpeg)
 
 ## In search of the perfect match
 

@@ -1,32 +1,15 @@
-<!-- layouts/posts/list.html -->
 <!DOCTYPE html>
 <html>
 {{ partial "header.html" . }}
 
 <body>
   <div class="container wrapper">
+
     {{ partial "head.html" . }}
 
-    {{/* Subnav de categorias (subsections de /posts/) */}}
-    {{ $postsSection := .Site.GetPage "section" "posts" }}
-    {{ if $postsSection }}
-      {{/* qual seção atual? (em /posts/strategia/, isso vira "strategia") */}}
-      {{ $currentSection := "" }}
-      {{ with .CurrentSection }}{{ $currentSection = .Title }}{{ end }}
-
-      <nav class="nav nav-categories" aria-label="{{ if eq .Site.Language.Lang "en" }}Categories{{ else }}Categorias{{ end }}">
-        <ul class="flat">
-          {{ range $postsSection.Sections.ByTitle }}
-            {{ $isActive := eq .RelPermalink $.RelPermalink }}
-            <li>
-              <a class="{{ if $isActive }}active{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </li>
-          {{ end }}
-        </ul>
-      </nav>
-    {{ end }}
-
-    <h1 class="page-title">{{ .Title }}</h1>
+    <h1 class="page-title">
+      {{ if eq .Site.Language.Lang "en" }}All posts{{ else }}Todos os posts{{ end }}
+    </h1>
 
     <div class="post-cards">
       {{/* pega TODOS os posts dentro de /posts/ incluindo subpastas */}}
@@ -51,6 +34,7 @@
 
       {{ partial "paginator.html" . }}
     </div>
+
   </div>
 
   {{ partial "footer.html" . }}

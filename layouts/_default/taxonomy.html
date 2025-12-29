@@ -1,4 +1,3 @@
-<!-- layouts/categorias/list.html (PT) -->
 <!DOCTYPE html>
 <html {{- if (eq .Site.Params.mode "dark" ) -}}class="dark" {{ end }}>
 {{ partial "header.html" . }}
@@ -9,23 +8,9 @@
 
     <h1 class="page-title">{{ .Title }}</h1>
 
-    {{ $posts := .Site.GetPage "section" "posts" }}
-    {{ if $posts }}
-      <nav class="nav nav-categories" aria-label="Categorias">
-        <ul class="flat">
-          {{ range $posts.Sections.ByTitle }}
-            <li>
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </li>
-          {{ end }}
-        </ul>
-      </nav>
-    {{ end }}
-
     <div class="recent-posts section">
       <div class="posts">
-        {{ $pages := where .Site.RegularPages "Section" "posts" }}
-        {{ $pages = where $pages "Params.hidden" "ne" true }}
+        {{ $pages := where .Pages "Params.hidden" "ne" true }}
         {{ $paginator := .Paginate $pages }}
         {{ range $paginator.Pages }}
           {{ partial "post-card.html" . }}

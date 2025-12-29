@@ -1,0 +1,44 @@
+{{/* layouts/categories/terms.html
+   Renders /<lang>/categories/ (list of latest posts + subnav of category terms)
+*/}}
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="container wrapper tags">
+    {{ partial "head.html" . }}
+    {{ partial "header.html" . }}
+
+    {{ if .Site.Params.statisticsEnabled }}
+      {{ partial "statistics.html" . }}
+    {{ end }}
+
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    {{/* Subnav with category terms */}}
+    <nav class="taxonomy-subnav" aria-label="{{ i18n "categories" | default "Categories" }}">
+      <ul class="flat taxonomy-subnav__list">
+        {{ range $term, $taxonomy := .Site.Taxonomies.categories.ByCount }}
+          <li class="taxonomy-subnav__item">
+            <a class="taxonomy-subnav__link" href="{{ $taxonomy.Page.RelPermalink }}">{{ $taxonomy.Page.LinkTitle }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    <div class="recent-posts section">
+      <div class="posts">
+        {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+        {{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
+        {{ range $paginator.Pages }}
+          {{ partial "post-card.html" . }}
+        {{ end }}
+        {{ template "partials/paginator.html" . }}
+      </div>
+    </div>
+  </div>
+
+  {{ partial "footer.html" . }}
+</body>
+
+</html>

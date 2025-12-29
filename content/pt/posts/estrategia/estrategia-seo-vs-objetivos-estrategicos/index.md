@@ -1,8 +1,8 @@
 ---
 title: "Estratégia de SEO vs. Objetivos Estratégicos de SEO"
 slug: "estrategia-seo-vs-objetivos-estrategicos"
+translationKey: "seo-strategy-vs-goals"
 date: 2025-12-27
-draft: false
 summary: "Objetivos dizem onde você precisa aparecer. Estratégia diz como chegar lá—mapeando intenção para templates com um framework simples de zoom."
 tags:
   - seo
@@ -10,8 +10,8 @@ tags:
   - arquitetura-da-informacao
   - intencao-de-busca
 images:
-  - seo-strategy-ricardo-maekawa-chart.jpeg
   - seo-strategy_og_pt.png
+  - seo-strategy-ricardo-maekawa-chart.jpeg
 ---
 
 

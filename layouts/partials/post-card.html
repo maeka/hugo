@@ -1,6 +1,12 @@
 {{/* layouts/partials/post-card.html */}}
 {{ $p := . }}
 
+{{/* ===== Author (definido SEMPRE no topo, fora de blocos) ===== */}}
+{{ $authorName := (site.Params.author.name | default "Ricardo Maekawa") }}
+{{ $authorAvatar := "" }}
+{{ with site.Params.author.avatar }}{{ $authorAvatar = . }}{{ end }}
+{{ if not $authorAvatar }}{{ with site.Params.author.image }}{{ $authorAvatar = . }}{{ end }}{{ end }}
+
 {{/* ===== Thumb: tenta bundle primeiro, depois params.images[0] ===== */}}
 {{ $thumb := "" }}
 {{ with $p.Resources.GetMatch "*featured*" }}
@@ -26,14 +32,6 @@
   {{ end }}
 {{ end }}
 
-{{/* ===== Author ===== */}}
-{{ $authorName := site.Params.author.name | default "Ricardo Maekawa" }}
-{{ $authorAvatar := "" }}
-{{ with site.Params.author.avatar }}{{ $authorAvatar = . }}{{ end }}
-{{ if not $authorAvatar }}
-  {{ with site.Params.author.image }}{{ $authorAvatar = . }}{{ end }}
-{{ end }}
-
 <article class="post-card">
   <div class="post-card__main">
 
@@ -54,24 +52,34 @@
 
     <div class="post-card__metaTop">
       <a class="post-card__author" href="{{ relLangURL "about/" }}">
-        <img
-          class="post-card__authorAvatar"
-          src="{{ $authorAvatar | relURL }}"
-          alt="{{ $authorName }}"
-        />
+        {{ if $authorAvatar }}
+          <img
+            class="post-card__authorAvatar"
+            src="{{ $authorAvatar | relURL }}"
+            alt="{{ $authorName }}"
+            loading="lazy"
+          />
+        {{ end }}
         <span class="post-card__authorName">{{ $authorName }}</span>
       </a>
 
-      <span class="post-card__dateInline">
-        · {{ $p.Date.Format "02 Jan 2006" }}
-      </span>
+      <span class="post-card__metaSep">·</span>
+      <span class="post-card__dateInline">{{ $p.Date.Format "02 Jan 2006" }}</span>
+
+      {{ $isPT := eq .Site.Language.Lang "pt" }}
+
+      {{ if gt $p.WordCount 0 }}
+        <span class="post-card__metaSep">·</span>
+        <span class="post-card__metaItem">{{ $p.WordCount }} {{ cond $isPT "palavras" "words" }}</span>
+      {{ end }}
+
+      {{ if gt $p.ReadingTime 0 }}
+        <span class="post-card__metaSep">·</span>
+        <span class="post-card__metaItem">~{{ $p.ReadingTime }} {{ cond $isPT "min de leitura" "min read" }}</span>
+      {{ end }}
     </div>
 
-<div class="post-card__metaBottom">
-
-      <span class="post-card__metrics">
-       {{ i18n "words_and_minutes" (dict "Words" $p.WordCount "Minutes" $p.ReadingTime) }}
-      </span>
+    <div class="post-card__metaBottom">
       {{ with $p.Params.tags }}
         <div class="post-card__tags">
           {{ range . }}
@@ -80,16 +88,15 @@
         </div>
       {{ end }}
     </div>
+
   </div>
-{{ if $thumbURL }}
-  <a class="post-card__thumb"
-     href="{{ $p.RelPermalink }}"
-     aria-label="Open {{ $p.Title }}"
-     style="--thumb:url('{{ $thumbURL }}');">
-    <img src="{{ $thumbURL }}" alt="" loading="lazy">
-  </a>
-{{ end }}
 
+  {{ if $thumbURL }}
+    <a class="post-card__thumb"
+      href="{{ $p.RelPermalink }}"
+      aria-label="Open {{ $p.Title }}"
+      style="--thumb:url('{{ $thumbURL }}');">
+      <img src="{{ $thumbURL }}" alt="" loading="lazy">
+    </a>
+  {{ end }}
 </article>
-
-

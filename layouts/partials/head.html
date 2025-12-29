@@ -1,56 +1,57 @@
+{{/* layouts/partials/head.html */}}
+<!-- debug -->
+
+
 <div class="header">
-
   <div class="header-top">
+    <div class="site-brand">
+      <a class="site-brand__logoLink" href="{{ relLangURL "" }}" aria-label="{{ .Site.Title }}">
+        <img class="site-brand__logo" src="{{ relURL "img/maeka_logo.png" }}" alt="{{ .Site.Title }}" loading="eager">
+      </a>
 
-    <!-- BRAND -->
-    <a class="site-brand" href="{{ .Site.Home.RelPermalink }}">
-      <img class="site-brand__logo"
-           src="{{ "/img/maeka_logo.png" | relURL }}"
-           alt="{{ .Site.Title }}"
-           loading="eager">
-
-      <span class="site-brand__text">
-        {{ if .IsHome }}
-          <h1 class="site-brand__title">
-            {{ i18n "siteTitle" | default .Site.Title }}
-          </h1>
-        {{ else }}
-          <div class="site-brand__title">
-            {{ i18n "siteTitle" | default .Site.Title }}
-          </div>
+      <div class="site-brand__text">
+        <h1 class="site-brand__title">
+          <a class="site-brand__titleLink" href="{{ relLangURL "" }}">{{ .Site.Title }}</a>
+        </h1>
+        {{ with .Site.Params.description }}
+          <p class="site-subtitle">{{ . }}</p>
         {{ end }}
-
-        {{- if isset .Site.Params "subtitle" -}}
-          <p class="site-brand__subtitle">{{ i18n "siteSubtitle" | safeHTML }}</p>
-        {{- end -}}
-      </span>
-    </a>
-
-    <!-- SOCIAL (igual ao tema, sem mudar lógica) -->
-    <div class="site-description">
-      <nav class="nav social">
-        <ul class="flat">
-          {{- range $index, $key := .Site.Params.Social -}}
-            <li><a href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a></li>
-          {{- end -}}
-
-          {{- if or (eq .Site.Params.mode "auto") (eq .Site.Params.mode "dark") -}}
-            <span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></span>
-          {{- end -}}
-        </ul>
-      </nav>
+      </div>
     </div>
 
+    <div class="site-description">
+      <nav class="nav social" aria-label="Social">
+        <ul class="flat">
+            {{- range $index, $key := .Site.Params.Social -}}
+              <li><a href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a></li>
+            {{- end -}}
+
+            {{- if or (eq .Site.Params.mode "auto") (eq .Site.Params.mode "dark") -}}
+              <span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></span>
+            {{- end -}}
+          </ul>
+      </nav>
+    </div>
   </div>
 
-  <!-- MENU (igual) -->
-  <nav class="nav">
-    <ul class="flat">
-      {{ range .Site.Menus.main }}
-        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+{{ $isCategoriesPage := and (in (slice "taxonomy" "term") .Kind) (eq .Data.Plural "categories") }}
+
+<nav class="nav" aria-label="Main navigation">
+  <ul class="flat">
+    {{ range .Site.Menus.main }}
+      {{ $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) (and $isCategoriesPage (eq .Identifier "categories")) }}
+      <li>
+        <a class="{{ if $active }}active{{ end }}" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+      </li>
+    {{ end }}
+
+    {{ if .IsTranslated }}
+      {{ range .Translations }}
+        <li><a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a></li>
       {{ end }}
-      {{ partial "lang-switcher.html" $ }}
-    </ul>
-  </nav>
+    {{ end }}
+  </ul>
+</nav>
+
 
 </div>

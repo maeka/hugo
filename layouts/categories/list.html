@@ -1,4 +1,4 @@
-<!-- layouts/categorias/list.html (PT) -->
+<!-- layouts/categories/list.html (EN) -->
 <!DOCTYPE html>
 <html {{- if (eq .Site.Params.mode "dark" ) -}}class="dark" {{ end }}>
 {{ partial "header.html" . }}
@@ -9,9 +9,10 @@
 
     <h1 class="page-title">{{ .Title }}</h1>
 
+    {{/* Secondary nav: post sections under /posts/ */}}
     {{ $posts := .Site.GetPage "section" "posts" }}
     {{ if $posts }}
-      <nav class="nav nav-categories" aria-label="Categorias">
+      <nav class="nav nav-categories" aria-label="Categories">
         <ul class="flat">
           {{ range $posts.Sections.ByTitle }}
             <li>
@@ -22,6 +23,7 @@
       </nav>
     {{ end }}
 
+    {{/* Home-like feed: latest posts */}}
     <div class="recent-posts section">
       <div class="posts">
         {{ $pages := where .Site.RegularPages "Section" "posts" }}

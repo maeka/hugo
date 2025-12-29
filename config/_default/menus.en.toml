@@ -5,7 +5,7 @@ pageRef    = '/'
 weight     = 1
 [[main]]
 identifier = 'posts'
-name       = 'All posts'
+name       = 'Categorias'
 pageRef    = '/posts'
 weight     = 2
 [[main]]
@@ -18,8 +18,3 @@ identifier = 'tags'
 name       = 'Tags & Stats'
 pageRef    = '/tags'
 weight     = 4
-#[[main]]
-#identifier = 'categories'
-#name       = 'Categorias'
-#pageRef    = '/categories'
-#weight     = 5

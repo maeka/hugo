@@ -1,3 +1,4 @@
 ---
 title: "Strategy"
+translationKey: "strategy"
 ---

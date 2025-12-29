@@ -3,6 +3,7 @@ title: "Em busca do 'exact match': quando busca e página se encontram"
 date: 2025-12-27
 slug: "exact-match-intencao-de-busca"
 description: "Por que o alinhamento perfeito entre intenção de busca e página de destino é decisivo para SEO — e o que fazer quando esse match não acontece."
+translationKey: "perfect-match"
 tags:
   - seo
   - estrategia

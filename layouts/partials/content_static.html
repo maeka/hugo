@@ -1,5 +1,7 @@
 <div class="post">
-  {{ partial "breadcrumbs.html" . }}
+  {{ if eq .Section "posts" }}
+    {{ partial "breadcrumbs.html" . }}
+  {{ end }}
   {{ partial "post_body.html" . }}
   <!--{{ partial "author-box.html" . }}-->
   {{ partial "article_footer.html" . }}
