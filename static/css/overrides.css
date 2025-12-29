@@ -3,6 +3,7 @@
 
 :root {
   --site-content-width: 800px;
+
 }
 
 /* =========================
@@ -183,9 +184,14 @@ img.avatar{
 
 /* Very small phones: shrink title/subtitle slightly more */
 @media (max-width: 380px){
-  .site-brand__title{ font-size: 18px; }
+  .site-brand__title{ font-size: 10px; }
   .site-subtitle{ font-size: 12px; }
   .nav.social svg{ width:16px; height:16px; }
+  .site-brand__logo{
+    width: 25px;
+    height: 25px;
+    border-radius: 999px;           /* keeps it round */
+  }
 }
 
 
@@ -617,4 +623,781 @@ nav[aria-label="Breadcrumb"]{
   position: static !important;
 }
 
+
+
+/* =========================
+   Subnav (categorias) - mobile friendly
+   ========================= */
+
+/* wrapper do submenu (o seu 2º <nav class="nav"> ou a linha de categorias) */
+.nav.subnav,
+.nav--sub,
+.posts-subnav,
+.taxo-subnav {
+  /* se você tiver uma classe específica pro submenu, melhor:
+     troque os seletores acima pela sua classe real */
+}
+
+/* alvo prático: o 2º menu que aparece abaixo do menu principal */
+.header .nav + .nav {
+  margin-top: 10px; /* aproxima do menu principal (ajuste fino) */
+}
+
+/* submenu: deixa responsivo e com quebra bonita */
+.header .nav + .nav ul.flat {
+  font-size: clamp(0.85rem, 0.5rem + 1.2vw, 1rem); /* “em-like” e responsivo */
+  line-height: 1.15;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px; /* espaçamento entre itens */
+  margin-top: 0;
+}
+
+/* itens do submenu */
+.header .nav + .nav ul.flat a {
+  display: inline-block;
+  padding: 2px 0;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere; /* evita “Estratégia” quebrar torto */
+}
+
+/* =========================
+   Logo sempre redondo
+   ========================= */
+.site-brand__logo {
+  width: 56px;         /* ajuste se quiser maior/menor */
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 520px) {
+  .site-brand__logo {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+/* =========================
+   1) MENU PRINCIPAL: <=412px
+   ========================= */
+@media (max-width: 412px) {
+  /* UL do menu principal */
+  .header .nav[aria-label="Main navigation"] ul.flat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    line-height: 1.2;
+  }
+
+  /* evita quebrar palavras no meio (Iníci / o) */
+  .header .nav[aria-label="Main navigation"] ul.flat a {
+    white-space: nowrap;
+  }
+
+  /* se ainda faltar espaço, deixa rolar horizontal ao invés de “explodir” */
+  .header .nav[aria-label="Main navigation"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .header .nav[aria-label="Main navigation"] ul.flat {
+    width: max-content;
+    padding-bottom: 4px;
+  }
+}
+
+/* =========================
+   2) POST CARD META: <=570px
+   Quebra em 2 linhas:
+   Linha 1: avatar + autor + data
+   Linha 2: wordcount + tempo de leitura
+   ========================= */
+@media (max-width: 570px) {
+  .post-card__metaTop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+  }
+
+  /* autor (inclui avatar + nome) fica na linha 1 */
+  .post-card__author {
+    order: 1;
+  }
+
+  /* data também na linha 1 */
+  .post-card__dateInline {
+    order: 2;
+  }
+
+  /* força quebra para começar a linha 2 */
+  .post-card__dateInline::after {
+    content: "";
+    flex-basis: 100%;
+    width: 0;
+    order: 3;
+  }
+
+  /* os itens “de baixo”: wordcount e tempo (metaItem) */
+  .post-card__metaTop .post-card__metaItem {
+    order: 4;
+  }
+
+  /* opcional: tirar separadores “•” que atrapalham no wrap */
+  .post-card__metaSep {
+    display: none;
+  }
+}
+
+/* =========================
+   NAV – alinhamento + subnav categorias
+   ========================= */
+
+/* Logo sempre redondo (evita ficar oval quando algum CSS mexe em width/height) */
+.site-brand__logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 570px) {
+  .site-brand__logo { width: 44px; height: 44px; }
+}
+
+/* Principal nav: usa fonte responsiva sem “matar” legibilidade */
+.header .nav[aria-label="Main navigation"] ul.flat {
+  font-size: clamp(0.90em, 2.6vw, 1em);
+  line-height: 1.2;
+  gap: 1.1em;
+  flex-wrap: wrap;
+}
+
+/* SUBNAV (categorias) – deixa com a mesma “cara” do menu principal */
+.nav.nav-categories {
+  /* se algum CSS antigo deixou sticky/fixed */
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+
+  /* aproxima do menu principal */
+  margin-top: -8px;   /* aproxima */
+  margin-bottom: 10px;
+}
+
+.nav.nav-categories ul.flat {
+  font-size: clamp(0.88em, 2.4vw, 0.98em);
+  line-height: 1.2;
+  gap: 1.1em;
+  flex-wrap: wrap;
+}
+
+/* Se você quiser mais perto ainda, aumenta o negativo aqui */
+@media (max-width: 570px) {
+  .nav.nav-categories { margin-top: -12px; margin-bottom: 6px; }
+  .nav.nav-categories ul.flat { gap: 0.9em; }
+}
+
+/* Em telas pequenas, em vez de “quebrar feio”, vira uma linha com scroll horizontal */
+@media (max-width: 412px) {
+  .nav.nav-categories ul.flat {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    scrollbar-width: none;          /* Firefox */
+  }
+  .nav.nav-categories ul.flat::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+}
+
+/* =========================
+   Post-card meta line (2 linhas < 570px)
+   ========================= */
+
+/* Ajuste geral: alinha melhor tudo numa linha */
+.post-card__metaTop {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  flex-wrap: wrap; /* permite quebrar quando precisar */
+}
+
+/* “Quebra bonita” no mobile: 2 linhas (avatar+autor+data) e (words+readtime) */
+@media (max-width: 570px) {
+  .post-card__metaTop {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-rows: auto;
+    column-gap: 0.7em;
+    row-gap: 0.2em;
+    align-items: center;
+  }
+
+  /* 1ª linha: avatar + autor (col 1-2) e data junto do autor */
+  .post-card__author {
+    grid-column: 1 / 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    min-width: 0;
+  }
+
+  /* 2ª linha: “words • read” */
+  .post-card__metaBottom {
+    grid-column: 1 / 3;
+    display: inline-flex;
+    gap: 0.6em;
+    flex-wrap: wrap;
+    margin-top: 2px;
+  }
+}
+
+/* Author avatar sempre redondo */
+.post-card__authorAvatar,
+.post-page__authorAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+}
+
+
+/* Hambúrguer CSS-only só em telas muito pequenas */
+.nav-categories__details { display: none; }
+
+@media (max-width: 350px) {
+  .nav.nav-categories { display: none; } /* esconde a linha normal */
+  .nav-categories__details { display: block; margin-top: -10px; margin-bottom: 10px; }
+
+  .nav-categories__summary {
+    cursor: pointer;
+    font-size: 0.95em;
+    line-height: 1.2;
+    padding: 6px 0;
+    list-style: none;
+  }
+  .nav-categories__summary::-webkit-details-marker { display:none; }
+
+  .nav-categories__details[open] .nav.nav-categories { display: block; }
+  .nav-categories__details[open] .nav.nav-categories ul.flat {
+    flex-wrap: wrap;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+}
+
+
+/* Subnav nunca sticky/fixed */
+.nav.nav-categories { position: static !important; top: auto !important; }
+
+/* Aproxima subnav do menu principal */
+.nav.nav-categories { margin-top: -12px; margin-bottom: 8px; }
+
+
+/* =========================
+   Subnav (Categories) layout
+   ========================= */
+
+/* 0) Garantir logo redondo SEMPRE (evita oval) */
+.site-brand__logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+}
+
+/* 1) Aproximar subnav do menu principal e remover “linha”/separador */
+.nav.nav-categories{
+  margin-top: 6px !important;     /* aproxima do menu principal */
+  padding-top: 0 !important;
+  border-top: 0 !important;       /* se existir alguma borda/linha aplicada por outro css */
+}
+
+.nav.nav-categories ul.flat{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 2) Desktop/tablet: mostra subnav normal, esconde o summary */
+.nav-categories__details{
+  margin-top: 6px;
+}
+
+.nav-categories__summary{
+  display: none;
+}
+
+/* 3) Subnav com tipografia mais “discreta” que o menu principal */
+.nav.nav-categories a{
+  font-size: 0.95em;              /* “em” pra escalar com o viewport */
+  line-height: 1.15;
+}
+
+/* 4) Mobile: permite quebrar bonito, sem ficar distante */
+@media (max-width: 570px){
+  .nav.nav-categories ul.flat{
+    flex-wrap: wrap;
+    gap: 10px 14px;               /* aproxima e organiza */
+  }
+  .nav.nav-categories a{
+    font-size: 0.92em;
+  }
+}
+
+/* 5) Extra-pequeno: vira “hambúrguer” (details/summary) abaixo de 350px */
+@media (max-width: 350px){
+  .nav-categories__summary{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95em;
+    line-height: 1.1;
+    margin: 6px 0 0 0;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 9999px;
+    user-select: none;
+  }
+
+  /* esconde o nav quando fechado */
+  .nav-categories__details:not([open]) .nav.nav-categories{
+    display: none;
+  }
+
+  /* quando abre, vira “drawer” simples */
+  .nav-categories__details[open] .nav.nav-categories{
+    display: block;
+    margin-top: 8px !important;
+  }
+
+  .nav.nav-categories ul.flat{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+}
+
+/* opcional: tirar marcador padrão do summary (Chrome/Safari) */
+.nav-categories__summary::-webkit-details-marker{ display: none; }
+.nav-categories__summary::marker{ content: ""; }
+
+/* --- Logo sempre redondo --- */
+.site-brand__logo {
+  width: 48px;
+  height: 48px;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Aproximar submenu do menu principal + remover “linha” visual --- */
+.nav.nav-categories {
+  margin-top: 6px !important;   /* mais perto do menu de cima */
+  padding-top: 0 !important;
+  border-top: 0 !important;     /* remove a linha entre os menus */
+}
+
+/* O <details> não precisa espaçar muito */
+.nav-categories__details {
+  margin-top: 6px !important;
+}
+
+/* Em desktop, o summary fica escondido (porque o details fica open) */
+.nav-categories__summary {
+  display: none;
+}
+
+/* --- Main nav em telas pequenas: evitar quebra feia --- */
+@media (max-width: 412px) {
+  .header .nav > ul.flat {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;                 /* reduz espaço */
+  }
+  .header .nav > ul.flat li {
+    display: inline-block;
+  }
+  .header .nav > ul.flat a {
+    font-size: clamp(0.85rem, 3.6vw, 0.95rem);
+  }
+}
+
+/* --- Subnav vira “hamburguer” (dropdown) abaixo de 350px --- */
+@media (max-width: 350px) {
+  .nav-categories__summary {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 6px 0;
+    font-size: 0.95em;         /* em/relativo */
+  }
+
+  /* quando fechado, não mostra a lista */
+  .nav-categories__details:not([open]) .nav.nav-categories {
+    display: none;
+  }
+
+  /* quando aberto, a lista vira bloco */
+  .nav.nav-categories > ul.flat {
+    display: grid;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .nav.nav-categories a {
+    font-size: 0.95em;
+  }
+}
+
+/* Aproxima subnav da nav principal e remove sensação de “linha separadora” */
+.nav-categories__details {
+  margin-top: 6px;          /* aproxima */
+}
+
+.nav-categories__details[open] .nav.nav-categories {
+  margin-top: 4px;          /* aproxima ainda mais quando aberto */
+}
+
+/* Se tiver alguma borda/linha vindo do tema, zera aqui */
+.nav.nav-categories {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Logo SEMPRE redondo */
+.site-brand__logo {
+  width: 48px;              /* ajuste se quiser maior */
+  height: 48px;
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* --- FIX: não cortar a subnav dentro do header --- */
+.header {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.header-top {
+  height: auto !important;         /* caso você tenha setado 130px antes */
+  overflow: visible !important;
+}
+
+/* aproxima o menu de categorias do menu principal */
+#nav-categories-details {
+  margin-top: -10px;   /* aproxima (ajuste fino: -6 a -14) */
+  margin-bottom: 6px;
+}
+
+/* se existir um <hr> ou border separando, neutraliza */
+#nav-categories-details,
+#nav-categories-details .nav {
+  border-top: 0 !important;
+}
+
+/* deixa a subnav um pouco menor que a nav principal */
+.nav.nav-categories a {
+  font-size: 0.95em;
+}
+
+
+/* Desktop/tablet: mostra a lista aberta e esconde o "hamburger" */
+.nav-categories__summary {
+  display: none;
+}
+
+#nav-categories-details[open] > nav {
+  display: block;
+}
+
+/* Mobile pequeno: vira hamburger */
+@media (max-width: 350px) {
+  .nav-categories__summary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5em;
+    font-size: 0.95em; /* em */
+    cursor: pointer;
+  }
+
+  /* fechado: não mostra a lista */
+  #nav-categories-details > nav {
+    display: none;
+  }
+
+  /* aberto: mostra */
+  #nav-categories-details[open] > nav {
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* melhora quebra/encaixe dos links */
+  .nav.nav-categories ul.flat {
+    flex-wrap: wrap;
+    row-gap: .6em;
+    column-gap: 1em;
+  }
+}
+
+
+/* --- meta: manter grupos juntos (evita quebrar feio) --- */
+.post-card__dateGroup,
+.post-card__metricsGroup{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.post-card__authorName{
+  min-width: 0;
+}
+
+/* fonte responsiva por viewport (sem ficar minúscula demais) */
+.post-card__metaTop,
+.post-card__metaBottom{
+  font-size: clamp(0.82rem, 2.2vw, 0.92rem);
+}
+
+/* em telas menores, não tenta espremer: quebra bonito em 2 linhas */
+@media (max-width: 570px){
+  .post-card__metaTop{
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* se precisar quebrar, quebra como bloco inteiro */
+  .post-card__dateGroup{
+    width: auto; /* mantém junto */
+  }
+
+  .post-card__metaBottom{
+    margin-top: 6px;
+  }
+}
+
+/* em telas MUITO pequenas (tipo <350px), força o meta em 2 linhas “bonitas” */
+@media (max-width: 350px){
+  .post-card__metaTop{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .post-card__metaBottom{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+
+/* ===== Post-card meta: quebra bonita em telas pequenas ===== */
+.post-card__metaTop{
+  font-size: 0.9em;   /* em (escala com o contexto) */
+  line-height: 1.25;
+}
+
+.post-card__metaBreak{ display:none; }
+
+@media (max-width: 570px){
+  .post-card__metaTop{
+    gap: 10px;
+    row-gap: 6px;
+    align-items: center;
+  }
+
+  /* some com os "·" no mobile (fica mais limpo quando quebra linha) */
+  .post-card__metaSep{ display:none; }
+
+  /* força a quebra exatamente depois da data */
+  .post-card__metaBreak{
+    display:block;
+    flex-basis: 100%;
+    height: 0;
+  }
+
+  /* garante que autor+data fiquem na 1ª linha e métricas na 2ª */
+  .post-card__author{ order: 1; }
+  .post-card__dateInline{ order: 2; opacity: .85; }
+  .post-card__metaItem{ order: 3; opacity: .85; }
+
+  /* evita o nome do autor esmagar tudo */
+  .post-card__authorName{
+    max-width: 22ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+/* ========= Logo sempre redondo ========= */
+.site-brand__logo {
+  width: 3.2em;
+  height: 3.2em;
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========= Post-card meta: alinhado + quebra bonita no mobile ========= */
+
+.post-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+
+.post-card__metaTop {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.post-card__author {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-width: 0;
+}
+
+.post-card__authorAvatar {
+  width: 1.35em;
+  height: 1.35em;
+  border-radius: 999px;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+.post-card__authorName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 26ch;
+}
+
+.post-card__dateInline {
+  white-space: nowrap;
+  opacity: 0.85;
+  font-size: 0.95em;
+}
+
+.post-card__metaBottom {
+  display: flex;
+  align-items: center;
+  gap: 0.6em 1em;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.post-card__metrics {
+  white-space: nowrap;
+  opacity: 0.85;
+  font-size: 0.95em;
+}
+
+/* < 570px: quebra em 2 linhas de forma “limpa”
+   Linha 1: avatar + nome + data
+   Linha 2: words/min + tags
+*/
+@media (max-width: 570px) {
+  .post-card__metaTop {
+    flex-wrap: nowrap;
+  }
+
+  .post-card__authorName {
+    max-width: 18ch;
+  }
+
+  .post-card__metaBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+}
+
+/* ========= Garantir que nav NÃO fica fixed/sticky ========= */
+.header,
+.header nav.nav {
+  position: static;
+  top: auto;
+}
+
+/* ========= Subnav (categorias) mais perto do menu principal ========= */
+#nav-categories-details {
+  margin-top: 0.35rem; /* aproxima */
+}
+
+.header nav.nav[aria-label="Main navigation"] {
+  margin-bottom: 0.2rem; /* aproxima do subnav */
+  padding-bottom: 0;
+  border-bottom: 0;      /* remove linha entre os menus, se vier daqui */
+}
+
+/* Subnav: espaçamento mais “compacto” e fonte em EM */
+.nav.nav-categories {
+  margin-top: 0.15rem;
+  padding-top: 0;
+  border-top: 0;        /* remove linha do subnav, se houver */
+  font-size: 0.95em;    /* em relativo */
+}
+
+.nav.nav-categories ul.flat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em 1.1em;    /* menos esparramado */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ========= Hamburger só < 350px (details/summary) ========= */
+
+/* Desktop/tablet: esconde o summary (vira “linha normal” sempre visível) */
+#nav-categories-details > summary {
+  display: none;
+}
+
+/* Mobile bem pequeno: vira dropdown/hamburger */
+@media (max-width: 350px) {
+  #nav-categories-details > summary {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1em; /* relativo */
+    margin: 0;
+    padding: 0.35em 0;
+  }
+
+  /* fechado: esconde */
+  #nav-categories-details > nav {
+    display: none;
+    margin-top: 0.5rem;
+  }
+
+  /* aberto: mostra */
+  #nav-categories-details[open] > nav {
+    display: block;
+  }
+
+  /* lista vertical no dropdown */
+  .nav.nav-categories ul.flat {
+    flex-direction: column;
+    gap: 0.6em;
+  }
+}
 

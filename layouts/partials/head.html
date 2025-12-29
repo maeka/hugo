@@ -34,12 +34,18 @@
     </div>
   </div>
 
-{{ $isCategoriesPage := and (in (slice "taxonomy" "term") .Kind) (eq .Data.Plural "categories") }}
+{{/* TRUE somente em /posts/ e /posts/<subsection>/ (listas). Nunca em single. */}}
+{{ $isPostsList := and (eq .Section "posts") .IsNode }}
 
 <nav class="nav" aria-label="Main navigation">
   <ul class="flat">
     {{ range .Site.Menus.main }}
-      {{ $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) (and $isCategoriesPage (eq .Identifier "categories")) }}
+      {{/* Mantém o ativo padrão do Hugo + força ativo em /posts/ para o item "posts" */}}
+      {{ $active := or
+          ($.IsMenuCurrent "main" .)
+          ($.HasMenuCurrent "main" .)
+          (and $isPostsList (eq .Identifier "posts"))
+      }}
       <li>
         <a class="{{ if $active }}active{{ end }}" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
       </li>
@@ -52,6 +58,49 @@
     {{ end }}
   </ul>
 </nav>
+
+{{/* Subnav de categorias: só em /posts/ e /posts/<subsection>/ */}}
+{{ $postsSection := .Site.GetPage "section" "posts" }}
+{{ if and $postsSection $isPostsList }}
+
+  <!--details class="nav-categories__details" id="nav-categories-details">
+    <summary class="nav-categories__summary">
+      {{ i18n "categories" }}
+    </summary-->
+  {{ if and (eq .Section "posts") (ne .Kind "page") }}
+    <nav class="nav nav-categories" aria-label="{{ i18n "categories" }}">
+      <ul class="flat">
+        {{ range $postsSection.Sections.ByTitle }}
+          {{ $isActive := eq .RelPermalink $.RelPermalink }}
+          <li>
+            <a class="{{ if $isActive }}active{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
+  <!--/details-->
+
+  <script>
+    (function () {
+      const details = document.getElementById("nav-categories-details");
+      if (!details) return;
+
+      function sync() {
+        if (window.matchMedia("(max-width: 350px)").matches) {
+          details.removeAttribute("open"); // vira dropdown
+        } else {
+          details.setAttribute("open", ""); // vira “linha normal”
+        }
+      }
+
+      sync();
+      window.addEventListener("resize", sync, { passive: true });
+    })();
+  </script>
+
+{{ end }}
+
 
 
 </div>
