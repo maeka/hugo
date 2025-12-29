@@ -1,0 +1,20 @@
+{{/* layouts/partials/schema/schema.html */}}
+{{- /* Dispatcher: renders the right JSON-LD per page kind */ -}}
+
+{{- $kind := .Kind -}}
+{{- $isHome := .IsHome -}}
+
+{{- if $isHome -}}
+  {{ partial "schema/schema-website.html" . }}
+  {{ partial "schema/schema-person.html" . }}
+{{- else if eq $kind "page" -}}
+  {{ partial "schema/schema-article.html" . }}
+  {{ partial "schema/schema-person.html" . }}
+{{- else if or (eq $kind "section") (eq $kind "taxonomy") (eq $kind "term") -}}
+  {{ partial "schema/schema-collection.html" . }}
+  {{ partial "schema/schema-person.html" . }}
+{{- else -}}
+  {{/* Fallback */}}
+  {{ partial "schema/schema-collection.html" . }}
+  {{ partial "schema/schema-person.html" . }}
+{{- end -}}

@@ -1,18 +1,53 @@
 baseURL = "https://maeka.com.br"
-languageCode = "en-us"
+languageCode = "pt"
+defaultContentLanguage = "pt"
+defaultContentLanguageInSubdir = true
 title = "MAEKA WEB STRATEGY"
 theme = "ink-free"
 pagination.pagerSize = 5
+
 
 copyright = "© Copyright notice"
 # Demo only
 #ignoreErrors = ["error-missing-instagram-accesstoken"]
 
-[permalinks]
-  posts = "/:year/:month/:title"
+
+[languages]
+
+  [languages.pt]
+    contentDir   = "content/pt"
+    languageName = "Português"
+    weight       = 1
+
+    [languages.pt.permalinks]
+      posts = "/:sections/:slug/"
+
+  [languages.en]
+    contentDir   = "content/en"
+    languageName = "English"
+    weight       = 2
+
+    [languages.en.permalinks]
+      posts = "/:sections/:slug/"
+
+
+[params.author]
+name  = "Ricardo Maekawa"
+image = "/img/ricardo-maekawa.jpeg"
+avatar = "/img/ricardo-maekawa.jpeg"
+
+[params.author.bio]
+pt = "Estrategista de comunicação digital."
+en = "Digital communication strategist."
+
+
 
 [params]
 	subtitle = "Mess is the order you can't understand. [Ricardo Maekawa](https://www.linkedin.com/in/maeka/) has a website."
+
+
+	customCSS = "css/overrides.css"
+
 
 	# Optional 64x64 avatar image.
 	#avatar = "https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg"
@@ -77,6 +112,11 @@ name = "Tags & Stats"
 url = "/tags"
 weight = 4
 
+[[menu.main]]
+name = "Categories"
+url  = "/categories"
+weight = 5
+
 [[params.social]]
 name = "Github"
 icon = "github"
@@ -111,3 +151,4 @@ url = "/index.xml"
     endLevel = 3
     ordered = true
     startLevel = 2
+

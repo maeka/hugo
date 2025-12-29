@@ -1,0 +1,42 @@
+{{/* layouts/partials/schema/schema-person.html */}}
+{{- $site := .Site -}}
+{{- $base := $site.BaseURL | strings.TrimRight "/" -}}
+
+{{- /* Configure these in hugo.toml under [params.author] */ -}}
+{{- $name := (or $site.Params.author.name $site.Params.author "Ricardo Maekawa") -}}
+{{- $alternateName := (or $site.Params.author.alternateName (slice "Maeka" "Ricardo Nogueira Maekawa")) -}}
+{{- $image := (or $site.Params.author.image $site.Params.avatar $site.Params.logo) -}}
+{{- $jobTitle := (or $site.Params.author.jobTitle "SEO & Web Strategy") -}}
+{{- $home := $site.Home.Permalink -}}
+{{- $sameAs := (or $site.Params.author.sameAs $site.Params.sameAs (slice)) -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": {{ printf "%q" (printf "%s/#person" $base) }},
+  "name": {{ printf "%q" $name }},
+  {{- if $alternateName }}
+  "alternateName": [
+    {{- range $i, $n := $alternateName -}}
+      {{- if $i }},{{ end }}{{ printf "%q" $n }}
+    {{- end -}}
+  ],
+  {{- end }}
+  {{- if $image }}
+  "image": {{ printf "%q" ($image | absURL) }},
+  {{- end }}
+  "url": {{ printf "%q" $home }},
+  "jobTitle": {{ printf "%q" $jobTitle }},
+  {{- with $site.Params.author.location }}
+  "homeLocation": {{ printf "%q" . }},
+  {{- end }}
+  {{- if gt (len $sameAs) 0 }}
+  "sameAs": [
+    {{- range $i, $u := $sameAs -}}
+      {{- if $i }},{{ end }}{{ printf "%q" $u }}
+    {{- end -}}
+  ]
+  {{- end }}
+}
+</script>

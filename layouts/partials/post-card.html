@@ -1,0 +1,95 @@
+{{/* layouts/partials/post-card.html */}}
+{{ $p := . }}
+
+{{/* ===== Thumb: tenta bundle primeiro, depois params.images[0] ===== */}}
+{{ $thumb := "" }}
+{{ with $p.Resources.GetMatch "*featured*" }}
+  {{ $thumb = .RelPermalink }}
+{{ else }}
+  {{ with $p.Resources.GetMatch "{*cover*,*thumb*,*thumbnail*,*hero*,*.jpg,*.jpeg,*.png,*.webp}" }}
+    {{ $thumb = .RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ if not $thumb }}
+  {{ with $p.Params.images }}
+    {{ if gt (len .) 0 }}{{ $thumb = index . 0 }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $thumbURL := "" }}
+{{ if $thumb }}
+  {{ if or (hasPrefix $thumb "http://") (hasPrefix $thumb "https://") }}
+    {{ $thumbURL = $thumb }}
+  {{ else }}
+    {{ $thumbURL = $thumb | relURL }}
+  {{ end }}
+{{ end }}
+
+{{/* ===== Author ===== */}}
+{{ $authorName := site.Params.author.name | default "Ricardo Maekawa" }}
+{{ $authorAvatar := "" }}
+{{ with site.Params.author.avatar }}{{ $authorAvatar = . }}{{ end }}
+{{ if not $authorAvatar }}
+  {{ with site.Params.author.image }}{{ $authorAvatar = . }}{{ end }}
+{{ end }}
+
+<article class="post-card">
+  <div class="post-card__main">
+
+    <h3 class="post-card__title">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}{{ if $p.Draft }} <sup class="draft-label">DRAFT</sup>{{ end }}</a>
+    </h3>
+
+    {{ $subtitle := "" }}
+    {{ if isset $p.Params "description" }}
+      {{ $subtitle = $p.Description }}
+    {{ else if gt (len ($p.Summary | plainify)) 0 }}
+      {{ $subtitle = $p.Summary | plainify }}
+    {{ end }}
+
+    {{ if $subtitle }}
+      <p class="post-card__subtitle">{{ $subtitle }}</p>
+    {{ end }}
+
+    <div class="post-card__metaTop">
+      <a class="post-card__author" href="{{ relLangURL "about/" }}">
+        <img
+          class="post-card__authorAvatar"
+          src="{{ $authorAvatar | relURL }}"
+          alt="{{ $authorName }}"
+        />
+        <span class="post-card__authorName">{{ $authorName }}</span>
+      </a>
+
+      <span class="post-card__dateInline">
+        · {{ $p.Date.Format "02 Jan 2006" }}
+      </span>
+    </div>
+
+<div class="post-card__metaBottom">
+
+      <span class="post-card__metrics">
+       {{ i18n "words_and_minutes" (dict "Words" $p.WordCount "Minutes" $p.ReadingTime) }}
+      </span>
+      {{ with $p.Params.tags }}
+        <div class="post-card__tags">
+          {{ range . }}
+            <a class="tag" href="{{ relLangURL (printf "tags/%s/" (. | urlize)) }}">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+{{ if $thumbURL }}
+  <a class="post-card__thumb"
+     href="{{ $p.RelPermalink }}"
+     aria-label="Open {{ $p.Title }}"
+     style="--thumb:url('{{ $thumbURL }}');">
+    <img src="{{ $thumbURL }}" alt="" loading="lazy">
+  </a>
+{{ end }}
+
+</article>
+
+

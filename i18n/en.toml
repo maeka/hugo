@@ -1,0 +1,31 @@
+# i18n/en.toml
+[siteTitle]
+other = "MAEKA WEB STRATEGY"
+
+# i18n/en.toml
+[siteSubtitle]
+other = 'Mess is the order you can’t understand'
+
+[tags]
+other = "Tags"
+
+[statistics]
+other = "Statistics"
+
+[allPosts]
+other = "All posts"
+
+[categories]
+other = "Categories"
+
+[authorPosts]
+other = "Author posts"
+
+[aboutAuthor]
+other = "About the author"
+
+[authorBio]
+other = "Digital communication strategist."
+
+[words_and_minutes]
+other = "{{ .Words }} words · ~{{ .Minutes }} min read"

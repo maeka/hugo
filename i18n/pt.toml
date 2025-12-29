@@ -1,0 +1,30 @@
+# i18n/pt.toml
+[siteTitle]
+other = "MAEKA ESTRATÉGIA WEB"
+
+[siteSubtitle]
+other = 'Bagunça é a ordem que você não consegue entender'
+
+[tags]
+other = "Etiquetas"
+
+[statistics]
+other = "Estatísticas"
+
+[allPosts]
+other = "Todos os posts"
+
+[categories]
+other = "Categorias"
+
+[authorPosts]
+other = "Posts do autor"
+
+[aboutAuthor]
+other = "Sobre o autor"
+
+[authorBio]
+other = "Estrategista de comunicação digital."
+
+[words_and_minutes]
+other = "{{ .Words }} palavras · ~{{ .Minutes }} min de leitura"

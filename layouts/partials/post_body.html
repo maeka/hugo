@@ -1,0 +1,29 @@
+<article class="post-page">
+
+  <header class="post-page__header">
+    <h1 class="post-page__title">{{ .Title }}</h1>
+
+    {{ partial "post_standfirst.html" . }}
+
+    {{ partial "post_meta_inline.html" . }}
+  </header>
+
+  {{ partial "featured_image.html" . }}
+
+  {{ if and (gt .WordCount 400) (or (eq .Site.Params.toc "static") (eq .Site.Params.toc "true")) }}
+    {{ partial "post_toc.html" . }}
+  {{ end }}
+
+  <div class="post-page__content">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.tags }}
+    <div class="post-page__tags">
+      {{ range . }}
+        <a class="tag" href="{{ (printf "/%s/tags/%s/" $.Lang (urlize .)) | relLangURL }}">{{ . }}</a>
+      {{ end }}
+    </div>
+  {{ end }}
+
+</article>

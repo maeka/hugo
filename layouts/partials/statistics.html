@@ -1,0 +1,39 @@
+{{/* Cria um scratch para somar as palavras */}}
+{{ $scratch := newScratch }}
+{{ range .Site.RegularPages }}
+    {{ $wordCountNoCode := replaceRE `(?s)<div class="highlight">.*?</div>` "" .Content | countwords }}
+    {{ $scratch.Add "wordcount" $wordCountNoCode }}
+{{ end }}
+
+{{/* Determina as seções principais; usa "posts" como padrão se não houver mainSections definido */}}
+{{ $mainSections := .Site.Params.mainSections | default (slice "posts") }}
+{{ $pages := where .Site.RegularPages "Type" "in" $mainSections }}
+
+<h1>Statistics</h1>
+<p>
+  <b>{{ $scratch.Get "wordcount" | lang.FormatNumberCustom 0 }}</b> words published over {{ len $pages }} articles since
+  {{ range last 1 $pages }}
+    {{ .Date.Month }} {{ .Date.Year }}.
+  {{ end }}
+</p>
+
+{{/* Converte valores para float para evitar erro no div */}}
+{{ $wordcount := float ($scratch.Get "wordcount" | default 0) }}
+{{ $wpm := float (.Site.Params.wpm | default 250) }}
+{{ $readingMins := div $wordcount $wpm }}
+
+<p>
+  Reading all that should take you about {{ $readingMins }} minutes
+  {{ if gt $readingMins 60 }}
+    (or ~{{ div $readingMins 60.0 | lang.FormatNumberCustom 1 }} hrs).
+  {{ else }}
+    .
+  {{ end }}
+</p>
+
+<p>
+  {{ $referenceWords := float (.Site.Params.referenceBookWords | default 95356.0) }}
+  {{ $referenceBook := .Site.Params.referenceBook | default "The Hobbit" }}
+  {{ $referenceAuthor := .Site.Params.referenceAuthor | default "J. R. R. Tolkien" }}
+  For reference, that's about {{ div $wordcount $referenceWords | lang.FormatNumberCustom 1 }}× "{{ $referenceBook }}" by {{ $referenceAuthor }}.
+</p>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+  <div class="container wrapper">
+
+    {{ partial "head.html" . }}
+
+    <h1 class="page-title">
+      {{ if eq .Site.Language.Lang "en" }}All posts{{ else }}Todos os posts{{ end }}
+    </h1>
+
+    <div class="post-cards">
+      {{/* pega TODOS os posts dentro de /posts/ incluindo subpastas */}}
+      {{ $pages := .RegularPagesRecursive }}
+
+      {{/* garante que são páginas normais */}}
+      {{ $pages = where $pages "Kind" "page" }}
+
+      {{/* exclui tipos opcionais */}}
+      {{ $excluded := .Site.Params.excludedTypes | default (slice "page") }}
+      {{ $pages = where $pages "Type" "not in" $excluded }}
+
+      {{/* ordenar do mais novo pro mais velho */}}
+      {{ $pages = $pages.ByDate.Reverse }}
+
+      {{/* PAGINAR (5 por página) */}}
+      {{ $p := .Paginate $pages 5 }}
+
+      {{ range $p.Pages }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+
+      {{ partial "paginator.html" . }}
+    </div>
+
+  </div>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

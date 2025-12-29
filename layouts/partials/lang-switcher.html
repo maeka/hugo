@@ -1,0 +1,11 @@
+{{ $current := $.Site.Language.Lang }}
+{{ range $.Site.Languages }}
+  {{ if ne .Lang $current }}
+    <!-- Monta link para a raiz do outro idioma (usa BaseURL + código) -->
+    <li><a href="{{ $.Site.BaseURL }}{{ .Lang }}/">{{ .LanguageName }}</a></li>
+  {{ end }}
+{{ end }}
+
+
+
+

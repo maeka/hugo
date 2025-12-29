@@ -1,0 +1,55 @@
+{{/* layouts/partials/author-box.html */}}
+
+{{- $lang := .Site.Language.Lang -}}
+
+{{- $name := .Site.Params.author.name | default "Ricardo Maekawa" -}}
+{{- $avatar := .Site.Params.author.avatar | default "/img/avatar.jpg" -}}
+{{- $aboutURL := relLangURL "about/" -}}
+
+{{/* description pode ser string OU map (pt/en) */}}
+{{- $desc := .Site.Params.author.description -}}
+{{- if (reflect.IsMap $desc) -}}
+  {{- $desc = index $desc $lang -}}
+{{- end -}}
+{{- $desc = $desc | default "" -}}
+
+{{/* links sociais (coloque no config.toml/yaml se quiser) */}}
+{{- $linkedin := .Site.Params.author.linkedin -}}
+{{- $instagram := .Site.Params.author.instagram -}}
+{{- $x := .Site.Params.author.x -}}
+{{- $github := .Site.Params.author.github -}}
+
+<div class="author-box">
+  <div class="author-box__avatar">
+    <a href="{{ $aboutURL }}" aria-label="{{ i18n "aboutAuthor" | default "About the author" }}">
+      <img src="{{ $avatar | relURL }}" alt="{{ $name }}" loading="lazy">
+    </a>
+  </div>
+
+  <div class="author-box__name">
+    <a href="{{ $aboutURL }}">{{ $name }}</a>
+  </div>
+
+  {{ if $desc }}
+    <div class="author-box__bio">{{ $desc }}</div>
+  {{ end }}
+
+  <div class="author-box__links">
+    {{ with $linkedin }}
+      <a href="{{ . }}" class="author-box__icon" title="LinkedIn" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+    {{ end }}
+    {{ with $instagram }}
+      <a href="{{ . }}" class="author-box__icon" title="Instagram" aria-label="Instagram"><i data-feather="instagram"></i></a>
+    {{ end }}
+    {{ with $x }}
+      <a href="{{ . }}" class="author-box__icon" title="X" aria-label="X"><i data-feather="twitter"></i></a>
+    {{ end }}
+    {{ with $github }}
+      <a href="{{ . }}" class="author-box__icon" title="GitHub" aria-label="GitHub"><i data-feather="github"></i></a>
+    {{ end }}
+
+    <a class="author-box__about" href="{{ $aboutURL }}">
+      {{ i18n "aboutAuthor" | default "About the author" }}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+{{ $sf := or .Params.standfirst .Params.subtitle .Description }}
+{{ with $sf }}
+  <p class="post-page__standfirst">{{ . | markdownify }}</p>
+{{ end }}

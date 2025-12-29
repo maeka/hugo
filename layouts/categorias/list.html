@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="container wrapper">
+  <h1>{{ i18n "allPosts" }}</h1>
+
+  <ul class="posts flat">
+    {{ range .RegularPagesRecursive.ByDate.Reverse }}
+      <li class="post">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

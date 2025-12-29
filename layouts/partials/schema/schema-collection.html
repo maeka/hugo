@@ -1,0 +1,24 @@
+{{/* layouts/partials/schema/schema-collection.html */}}
+{{- $site := .Site -}}
+{{- $base := $site.BaseURL | strings.TrimRight "/" -}}
+{{- $url := .Permalink -}}
+{{- $title := .Title -}}
+{{- $desc := (or .Params.description .Summary $site.Params.subtitle) -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": {{ printf "%q" (printf "%s#collection" $url) }},
+  "url": {{ printf "%q" $url }},
+  "name": {{ printf "%q" $title }},
+  {{- if $desc }}
+  "description": {{ printf "%q" $desc }},
+  {{- end }}
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": {{ printf "%q" (printf "%s/#website" $base) }}
+  },
+  "inLanguage": {{ printf "%q" $site.Language.Lang }}
+}
+</script>

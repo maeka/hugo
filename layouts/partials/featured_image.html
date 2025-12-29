@@ -1,0 +1,52 @@
+{{- $caption := or .Params.image_caption .Params.featured_caption .Params.caption -}}
+{{- $alt := .Title -}}
+
+{{/* 1) Descobrir o nome do arquivo */}}
+{{- $imgName := "" -}}
+{{- with (or .Params.featured_image .Params.featuredImage .Params.image) -}}
+  {{- $imgName = . -}}
+{{- end -}}
+{{- if and (eq $imgName "") (isset .Params "images") -}}
+  {{- $first := index .Params.images 0 -}}
+  {{- if $first -}}
+    {{- $imgName = $first -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 2) Tentar como Page Resource (bundle) e renderizar */}}
+{{- with $imgName -}}
+  {{- $name := . -}}
+
+  {{/* tenta match direto */}}
+  {{- with $.Resources.GetMatch $name -}}
+    <figure class="post-page__featured">
+      <img class="post-page__featuredImg" src="{{ .RelPermalink }}" alt="{{ $alt }}" loading="eager">
+      {{ with $caption }}
+        <figcaption class="post-page__featuredCaption">{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </figure>
+
+  {{- else -}}
+
+    {{/* tenta match com wildcard (caso esteja em subpasta do bundle) */}}
+    {{- with $.Resources.GetMatch (printf "*%s" $name) -}}
+      <figure class="post-page__featured">
+        <img class="post-page__featuredImg" src="{{ .RelPermalink }}" alt="{{ $alt }}" loading="eager">
+        {{ with $caption }}
+          <figcaption class="post-page__featuredCaption">{{ . | markdownify }}</figcaption>
+        {{ end }}
+      </figure>
+
+    {{- else -}}
+
+      {{/* fallback: trata como caminho estático (ex: /images/... ou css-critical-path.jpeg em static) */}}
+      <figure class="post-page__featured">
+        <img class="post-page__featuredImg" src="{{ $name | relURL }}" alt="{{ $alt }}" loading="eager">
+        {{ with $caption }}
+          <figcaption class="post-page__featuredCaption">{{ . | markdownify }}</figcaption>
+        {{ end }}
+      </figure>
+
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

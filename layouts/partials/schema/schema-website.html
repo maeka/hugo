@@ -1,0 +1,35 @@
+{{/* layouts/partials/schema/schema-website.html */}}
+{{- $site := .Site -}}
+{{- $base := $site.BaseURL | strings.TrimRight "/" -}}
+{{- $home := $site.Home.Permalink -}}
+{{- $logo := (or $site.Params.logo $site.Params.avatar) -}}
+{{- $sameAs := (or $site.Params.sameAs (slice)) -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": {{ printf "%q" (printf "%s/#website" $base) }},
+  "url": {{ printf "%q" $home }},
+  "name": {{ printf "%q" $site.Title }},
+  {{- with $site.Params.subtitle }}
+  "description": {{ printf "%q" . }},
+  {{- end }}
+  {{- if $logo }}
+  "publisher": {
+    "@type": "Person",
+    "@id": {{ printf "%q" (printf "%s/#person" $base) }},
+    "name": {{ printf "%q" (or $site.Params.author.name $site.Params.author "Ricardo Maekawa") }},
+    "image": {{ printf "%q" ($logo | absURL) }}
+  },
+  {{- end }}
+  {{- if gt (len $sameAs) 0 }}
+  "sameAs": [
+    {{- range $i, $u := $sameAs -}}
+      {{- if $i }},{{ end }}{{ printf "%q" $u }}
+    {{- end -}}
+  ],
+  {{- end }}
+  "inLanguage": {{ printf "%q" $site.Language.Lang }}
+}
+</script>

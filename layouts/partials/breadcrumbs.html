@@ -1,0 +1,29 @@
+{{/* Breadcrumbs simples, i18n-safe, sem título do post */}}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+
+  <a href="{{ .Site.Home.RelPermalink }}">
+    {{ i18n "home" | default "Home" }}
+  </a>
+
+  {{/* Apenas para posts */}}
+  {{ if eq .Section "posts" }}
+
+    <span class="sep">›</span>
+    <a href="{{ (site.GetPage "section" "posts").RelPermalink }}">
+      {{ i18n "posts" | default "Posts" }}
+    </a>
+
+    {{/* Categoria (subsection) */}}
+    {{ with .CurrentSection }}
+      {{ if ne .RelPermalink (site.GetPage "section" "posts").RelPermalink }}
+        <span class="sep">›</span>
+        <a href="{{ .RelPermalink }}">
+          {{ .Title }}
+        </a>
+      {{ end }}
+    {{ end }}
+
+  {{ end }}
+
+</nav>

@@ -1,0 +1,25 @@
+[[main]]
+identifier = 'home'
+name       = 'Início'
+pageRef    = '/'
+weight     = 1
+[[main]]
+identifier = 'posts'
+name       = 'Todos os posts'
+pageRef    = '/posts'
+weight     = 2
+[[main]]
+identifier = 'about'
+name       = 'Sobre'
+pageRef    = '/about'
+weight     = 3
+[[main]]
+identifier = 'tags'
+name       = 'Etiquetas'
+pageRef    = '/tags'
+weight     = 4
+#[[main]]
+#identifier = 'categorias'
+#name       = 'Categorias'
+#pageRef    = '/categorias'
+#weight     = 5

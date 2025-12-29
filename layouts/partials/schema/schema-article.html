@@ -1,0 +1,59 @@
+{{/* layouts/partials/schema/schema-article.html */}}
+{{- $site := .Site -}}
+{{- $base := $site.BaseURL | strings.TrimRight "/" -}}
+{{- $authorName := (or $site.Params.author.name $site.Params.author "Ricardo Maekawa") -}}
+{{- $authorId := (printf "%s/#person" $base) -}}
+
+{{- /* Basic fields */ -}}
+{{- $title := .Title -}}
+{{- $url := .Permalink -}}
+{{- $datePublished := .Date -}}
+{{- $dateModified := (or .Lastmod .Date) -}}
+{{- $desc := (or .Params.description .Summary) -}}
+
+{{- /* Pick an image: params.images (array) or params.image (string) */ -}}
+{{- $img := "" -}}
+{{- with .Params.images -}}
+  {{- if gt (len .) 0 -}}
+    {{- $img = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $img -}}
+  {{- with .Params.image -}}
+    {{- $img = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $imgURL := "" -}}
+{{- if $img -}}
+  {{- $imgURL = ($img | absURL) -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": {{ printf "%q" (printf "%s#article" $url) }},
+  "mainEntityOfPage": {{ printf "%q" $url }},
+  "headline": {{ printf "%q" $title }},
+  {{- if $desc }}
+  "description": {{ printf "%q" $desc }},
+  {{- end }}
+  {{- if $imgURL }}
+  "image": [{{ printf "%q" $imgURL }}],
+  {{- end }}
+  "datePublished": {{ printf "%q" ($datePublished.Format "2006-01-02T15:04:05Z07:00") }},
+  "dateModified": {{ printf "%q" ($dateModified.Format "2006-01-02T15:04:05Z07:00") }},
+  "author": {
+    "@type": "Person",
+    "@id": {{ printf "%q" $authorId }},
+    "name": {{ printf "%q" $authorName }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "@id": {{ printf "%q" $authorId }},
+    "name": {{ printf "%q" $authorName }}
+  },
+  "inLanguage": {{ printf "%q" $site.Language.Lang }}
+}
+</script>
