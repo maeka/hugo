@@ -1550,3 +1550,15 @@ img.author-avatar{
 }
 
 
+/* FIX: avatar do autor (post e about) sempre redondo */
+img.post-page__authorAvatar {
+  width: 28px !important;
+  height: 28px !important;
+  aspect-ratio: 1 / 1 !important;
+
+  border-radius: 50% !important;
+  object-fit: cover !important;
+
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
