@@ -681,6 +681,7 @@ body:not(.dark) .site-brand__title{ color: rgba(0,0,0,0.88); }
   align-items: center !important;
   gap: 12px !important;
   text-decoration: none !important;
+  margin-bottom: 10px !important;;
 }
 
 .site-brand__logo{
