@@ -13,7 +13,6 @@ images:
   - css-critical-path.jpeg
 ---
 
-![Page load optimization](css-critical-path.jpeg)
 
 ## ⚡️ How to make a web page 2s faster and gain +15 PageSpeed points
 
