@@ -1134,3 +1134,8 @@ nav[aria-label="Breadcrumb"] {
   margin-top: 15px; /* reforça o afastamento das tags */
 }
 
+.post-cards > .post-card:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

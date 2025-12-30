@@ -36,6 +36,10 @@
 
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/overrides.css" />
 
+	<link rel="icon" href="{{ .Site.BaseURL }}img/favicon.ico" type="image/png">
+	<link rel="apple-touch-icon" href="{{ .Site.BaseURL }}img/favicon.ico">
+	<meta name="theme-color" content="#000000"> <!-- Opcional: define a cor da barra do navegador no mobile -->
+
 
 	{{- $enableUmami := and (isset .Site.Params "enableumami") (.Site.Params.enableUmami) -}}
 	{{- $hasURL := isset .Site.Params "umamiurl" -}}
