@@ -1013,6 +1013,17 @@ nav[aria-label="Breadcrumb"] {
   .header .header-logo span {
     font-size: 1rem;
   }
+  .breadcrumbs,
+  .breadcrumbs a {
+    font-size: 0.75rem; /* ou 12px */
+    letter-spacing: -0.2px;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap; /* se usar Flexbox, ajuda a quebrar corretamente */
+    gap: 0.25rem;
+  }
 }
 
 
@@ -1138,4 +1149,18 @@ nav[aria-label="Breadcrumb"] {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+
+
+/* Remove espaço excessivo no topo da listagem de posts */
+@media (max-width: 600px) {
+  .post-cards {
+    margin-top: 0.5rem !important; /* ou ajuste menor ainda se preferir */
+    padding-top: 0 !important;
+  }
+
+  .main {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 }
