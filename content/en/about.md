@@ -30,5 +30,5 @@ When I’m not optimising websites, I enjoy exploring the messy side of creativi
 ### Downloads
 
 - [Download my CV with publications](/files/Ricardo_Maekawa_CV_EN_with_Publications.pdf)
-- [Read some funny facts from my early articles](/files/ricardo-maekawa_funny_facts.pdf)
+- [Read some funny facts from my early articles](/files/maeka.pdf)
 

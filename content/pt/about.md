@@ -30,4 +30,4 @@ Quando não estou otimizando sites, gosto de explorar o lado bagunçado da criat
 ### Downloads
 
 - [Baixe meu currículo com publicações](/files/Ricardo_Maekawa_CV_EN_with_Publications.pdf)
-- [Leia curiosidades e textos antigos](/files/ricardo-maekawa_funny_facts.pdf)
+- [Leia curiosidades e textos antigos](/files/maeka.pdf)
