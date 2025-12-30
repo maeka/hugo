@@ -66,8 +66,9 @@
       <span class="post-card__metaSep">·</span>
       <span class="post-card__dateInline">{{ $p.Date.Format "02 Jan 2006" }}</span>
 
-      <span class="post-card__metaBreak" aria-hidden="true"></span>
-
+      {{ if or (gt $p.WordCount 0) (gt $p.ReadingTime 0) }}
+        <span class="post-card__metaBreak" aria-hidden="true"></span>
+      {{ end }}
       {{ $isPT := eq .Site.Language.Lang "pt" }}
 
       {{ if gt $p.WordCount 0 }}
@@ -95,9 +96,9 @@
 
   {{ if $thumbURL }}
     <a class="post-card__thumb"
-      href="{{ $p.RelPermalink }}"
-      aria-label="Open {{ $p.Title }}"
-      style="--thumb:url('{{ $thumbURL }}');">
+       href="{{ $p.RelPermalink }}"
+       aria-label="Open {{ $p.Title }}"
+       style="--thumb:url('{{ $thumbURL }}');">
       <img src="{{ $thumbURL }}" alt="" loading="lazy">
     </a>
   {{ end }}
