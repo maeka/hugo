@@ -9,7 +9,7 @@
 {{ $mainSections := .Site.Params.mainSections | default (slice "posts") }}
 {{ $pages := where .Site.RegularPages "Type" "in" $mainSections }}
 
-<h1>Statistics</h1>
+<h1>{{ i18n "statistics" }}</h1>
 <p>
   <b>{{ $scratch.Get "wordcount" | lang.FormatNumberCustom 0 }}</b> words published over {{ len $pages }} articles since
   {{ range last 1 $pages }}

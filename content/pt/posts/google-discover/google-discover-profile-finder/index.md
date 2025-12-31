@@ -2,6 +2,7 @@
 title: "Google Discover Profile Finder: porque isso nunca deveria ser tão difícil"
 date: 2025-12-27
 slug: "google-discover-profile-finder"
+translationKey: "profile-finder"
 description: "Um mini app em Streamlit que encontra o Google Discover Profile de uma entidade via Knowledge Graph (MID → hash → URL)."
 tags:
   - google-discover
