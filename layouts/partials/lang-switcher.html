@@ -1,10 +1,84 @@
-{{ $current := $.Site.Language.Lang }}
-{{ range $.Site.Languages }}
-  {{ if ne .Lang $current }}
-    <!-- Monta link para a raiz do outro idioma (usa BaseURL + código) -->
-    <li><a href="{{ $.Site.BaseURL }}{{ .Lang }}/">{{ .LanguageName }}</a></li>
-  {{ end }}
-{{ end }}
+{{/* layouts/partials/lang-switcher.html */}}
+
+{{ $currentLang := .Site.Language.Lang }}
+{{ $currentName := .Site.Language.LanguageName }}
+
+{{/* Lista de destinos:
+     - Se a página é traduzida: usa .AllTranslations (inclui a atual)
+     - Se não: linka para a HOME de cada idioma
+*/}}
+
+<div class="lang-switcher">
+  <details class="lang-switcher__details" id="lang-switcher">
+    <summary class="lang-switcher__summary" aria-label="Language selector">
+      <span class="lang-switcher__icon" aria-hidden="true">
+        <i data-feather="globe"></i>
+      </span>
+      <span class="lang-switcher__label">
+        {{ $currentLang | upper }}
+      </span>
+      <span class="lang-switcher__chev" aria-hidden="true">▾</span>
+    </summary>
+
+    <ul class="lang-switcher__menu">
+      {{ if .IsTranslated }}
+        {{ range .AllTranslations }}
+          {{ $isCurrent := eq .Lang $currentLang }}
+          <li>
+            <a class="lang-switcher__item {{ if $isCurrent }}is-current{{ end }}"
+               href="{{ .RelPermalink }}"
+               hreflang="{{ .Lang }}">
+              {{ .Language.LanguageName }}
+            </a>
+          </li>
+        {{ end }}
+      {{ else }}
+        {{ range .Site.Languages }}
+          {{ $isCurrent := eq .Lang $currentLang }}
+          <li>
+            <a class="lang-switcher__item {{ if $isCurrent }}is-current{{ end }}"
+               href="{{ $.Site.BaseURL }}{{ .Lang }}/"
+               hreflang="{{ .Lang }}">
+              {{ .LanguageName }}
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </details>
+</div>
+
+<script>
+(() => {
+  const details = document.getElementById("lang-switcher");
+  if (!details) return;
+
+  // 1) Desliga completamente o comportamento antigo de hover
+  // (não adicionamos pointerenter/pointerleave)
+
+  const close = () => details.removeAttribute("open");
+
+  // 2) Fecha ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!details.hasAttribute("open")) return;
+    if (details.contains(e.target)) return;
+    close();
+  });
+
+  // 3) Fecha ao apertar ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  // 4) Fecha ao selecionar uma língua (antes de navegar)
+  details.addEventListener("click", (e) => {
+    const a = e.target.closest("a.lang-switcher__item");
+    if (!a) return;
+    close();
+  });
+})();
+</script>
+
 
 
 

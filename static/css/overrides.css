@@ -1048,3 +1048,605 @@ html{
 }
 
 
+/* container dentro do <li> do menu */
+.nav-lang { margin-left: 12px; }
+
+/* botão */
+.lang-switcher__details { position: relative; }
+.lang-switcher__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* remove marcador padrão do details */
+.lang-switcher__summary::-webkit-details-marker { display: none; }
+
+.lang-switcher__label {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* dropdown */
+.lang-switcher__menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  border-radius: 12px;
+  z-index: 999;
+}
+
+.lang-switcher__item {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lang-switcher__item.is-current {
+  font-weight: 700;
+}
+
+/* cores: herda suas cores atuais via vars/seletor do tema */
+.lang-switcher__summary:hover,
+.lang-switcher__details[open] .lang-switcher__summary {
+  background: rgba(255,255,255,0.06);
+}
+
+.lang-switcher__menu {
+  background: rgba(10,10,14,0.92);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+}
+
+.lang-switcher__item:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+
+
+/* Menu superior: centralização vertical + espaço até o seletor de idioma */
+.header-navwrap > nav.nav ul.flat{
+  display: flex;
+  align-items: center;   /* centraliza verticalmente tudo no menu */
+  gap: 24px;
+}
+
+/* Item do seletor de idioma vai pro canto direito */
+.header-navwrap > nav.nav ul.flat > li:has(.lang),
+.header-navwrap > nav.nav ul.flat > li:has(.language),
+.header-navwrap > nav.nav ul.flat > li:has(.i18n),
+.header-navwrap > nav.nav ul.flat > li:has(button[aria-haspopup="menu"]),
+.header-navwrap > nav.nav ul.flat > li:has(.dropdown){
+  margin-left: auto;
+}
+
+
+/* Botão do idioma: centraliza conteúdo e ajusta altura */
+.header-navwrap button[aria-haspopup="menu"]{
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Sobe só o ícone (globo) um tiquinho */
+.header-navwrap button[aria-haspopup="menu"] svg{
+  position: relative;
+  top: -1px;   /* ajuste fino */
+}
+
+
+/* =========================
+   Language switcher polish
+   ========================= */
+
+/* 1) Botão (globo + EN): sem borda, sem radius, alinhamento vertical */
+.lang-switcher__summary{
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  display: inline-flex !important;
+  align-items: center !important;      /* centraliza verticalmente */
+  gap: 8px;
+  padding: 8px 10px !important;
+}
+
+/* 2) Hover no botão: sem radius */
+.lang-switcher__summary:hover,
+.lang-switcher__summary:focus,
+.lang-switcher__summary:focus-visible{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Ajuste fino: sobe um pouquinho o ícone do globo */
+.lang-switcher__icon{
+  position: relative;
+  top: -1px;
+}
+
+/* 3) Dropdown colado no botão (parece peça única) */
+details.lang-switcher__details{
+  position: relative; /* âncora para o menu absoluto */
+}
+
+.lang-switcher__menu{
+  position: absolute !important;
+  right: 0 !important;    /* alinha o menu à direita do botão */
+  left: auto !important;
+  top: 100% !important;
+  margin-top: -2px !important; /* cola no botão (ajuste: -1px/0 se quiser) */
+
+  /* sem borda e sem radius */
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  /* dimensões e espaçamento */
+  min-width: 180px;
+  padding: 10px 0 !important;
+}
+
+/* 4) Opções (Português/English) alinhadas à direita */
+.lang-switcher__menu li{
+  width: 100%;
+}
+
+.lang-switcher__menu .lang-switcher__item{
+  display: block !important;
+  width: 100% !important;
+  text-align: right !important;
+
+  /* padding com “respiro” do lado direito */
+  padding: 10px 16px 10px 24px !important;
+  border-radius: 0 !important; /* sem arredondado no hover também */
+}
+
+/* 5) Hover das opções sem radius */
+.lang-switcher__menu .lang-switcher__item:hover{
+  border-radius: 0 !important;
+}
+
+/* =========================
+   Language switcher: hover + dropdown backgrounds
+   ========================= */
+
+/* 1) Botão (globo + EN): volta a ter hover, mas sem borda arredondada */
+.lang-switcher__summary{
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px;
+  padding: 8px 10px !important;
+
+  background: transparent !important; /* estado normal */
+}
+
+/* hover/focus com fundo (igual antes), só que quadrado */
+.lang-switcher__summary:hover,
+.lang-switcher__summary:focus-visible{
+  background: rgba(255,255,255,.06) !important;
+  border-radius: 0 !important;
+}
+
+/* 2) Dropdown: fundo único (sem borda/radius) e “colado” no botão */
+details.lang-switcher__details{ position: relative; }
+
+.lang-switcher__menu{
+  position: absolute !important;
+  right: 0 !important;
+  left: auto !important;
+  top: 100% !important;
+  margin-top: 0 !important; /* cola no botão */
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  background: rgba(20,20,20,.95) !important; /* fundo sólido do painel */
+  padding: 6px 0 !important;
+  min-width: 200px;
+}
+
+/* 3) Itens: sem “caixas” estranhas, alinhados à direita */
+.lang-switcher__menu li{ width: 100%; }
+
+.lang-switcher__menu .lang-switcher__item{
+  display: block !important;
+  width: 100% !important;
+  text-align: right !important;
+
+  padding: 12px 16px !important;
+
+  background: transparent !important; /* default */
+  border-radius: 0 !important;        /* sem arredondado */
+}
+
+/* hover do item: um highlight sutil, quadrado */
+.lang-switcher__menu .lang-switcher__item:hover{
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* item atual (“English”) pode ter um destaque sutil */
+.lang-switcher__menu .lang-switcher__item.is-current{
+  background: rgba(255,255,255,.03) !important;
+}
+
+
+/* =========================
+   Language switcher: active on click + unified container
+   ========================= */
+
+/* Container do seletor (engloba botão + dropdown) */
+details.lang-switcher__details{
+  position: relative;
+  display: inline-block;
+
+  /* “caixa” única */
+  background: rgba(255,255,255,.06);
+  border-radius: 0 !important;
+}
+
+/* Por padrão, sem destaque (só aparece quando aberto) */
+details.lang-switcher__details:not([open]){
+  background: transparent !important;
+}
+
+/* Botão (summary) sem fundo próprio — quem “pinta” é o details quando aberto */
+.lang-switcher__summary{
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px;
+  padding: 10px 12px !important;
+}
+
+/* Remove highlight no hover (você pediu click) */
+.lang-switcher__summary:hover,
+.lang-switcher__summary:focus-visible{
+  background: transparent !important;
+}
+
+/* Quando aberto: deixa o “globo” com fundo ativo (via details[open]) */
+details.lang-switcher__details[open]{
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* Dropdown “dentro” da mesma caixa */
+.lang-switcher__menu{
+  position: absolute !important;
+  left: 0 !important;     /* começa no mesmo lado do botão */
+  right: 0 !important;    /* termina no mesmo lado do botão */
+  top: 100% !important;
+  margin-top: 0 !important;
+
+  background: rgba(20,20,20,.95) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  padding: 6px 0 !important;
+}
+
+/* Links ocupam 100% do dropdown e ficam alinhados à direita */
+.lang-switcher__menu li{ width: 100%; }
+
+.lang-switcher__menu .lang-switcher__item{
+  display: block !important;
+  width: 100% !important;
+  text-align: right !important;
+
+  padding: 12px 14px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Hover dos itens (só dentro do dropdown) */
+.lang-switcher__menu .lang-switcher__item:hover{
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* Item atual */
+.lang-switcher__menu .lang-switcher__item.is-current{
+  background: rgba(255,255,255,.03) !important;
+}
+
+
+/* ===== Fix bleeding: dropdown contém os links ===== */
+
+details.lang-switcher__details{
+  position: relative;
+}
+
+/* O painel (ul) deve ter largura e cortar overflow */
+.lang-switcher__menu{
+  left: 0 !important;
+  right: 0 !important;
+  width: auto !important;
+
+  overflow: hidden !important;         /* corta qualquer “sangramento” */
+  box-sizing: border-box !important;
+
+  background: rgba(20,20,20,.95) !important;
+}
+
+/* Os itens não podem empurrar o layout */
+.lang-switcher__menu li{
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Links ocupam 100% e ficam dentro do box do menu */
+.lang-switcher__menu .lang-switcher__item{
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+
+  margin: 0 !important;
+  text-align: right !important;
+
+  /* padding só interno (não estoura) */
+  padding: 12px 14px !important;
+}
+
+
+/* ===== Mobile: language dropdown abre para a esquerda ===== */
+@media (max-width: 520px){
+  .lang-switcher__menu{
+    left: auto !important;
+    right: 0 !important;          /* ancora no botão */
+    width: 220px !important;      /* largura fixa */
+    max-width: calc(100vw - 16px) !important; /* nunca vaza da tela */
+
+    overflow: hidden !important;  /* segurança contra sangramento */
+  }
+}
+
+
+/* ===== Mobile: manter EN/PT visível e NÃO pular linha ao abrir ===== */
+@media (max-width: 520px){
+
+  /* 1) EN/PT volta a aparecer */
+  .lang-switcher__label{
+    display: inline !important;
+    font-size: 14px !important;
+  }
+
+  /* 2) O item do idioma não pode “reflowar” */
+  .header-navwrap > nav.nav ul.flat > li.nav-lang{
+    flex: 0 0 auto !important;
+    margin-left: auto !important;      /* fica no canto direito do “row” */
+  }
+
+  /* 3) Fixar a “largura” do botão (summary) para não mudar ao abrir */
+  .lang-switcher__summary{
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    padding: 6px 8px !important;
+    gap: 6px !important;
+    min-width: 72px !important;        /* evita variar com estilos do open */
+    justify-content: center !important;
+  }
+
+  /* 4) O details não pode virar uma caixa larga quando abre */
+  details.lang-switcher__details,
+  details.lang-switcher__details[open]{
+    background: transparent !important; /* tira “caixa” que aumenta width */
+    width: auto !important;
+  }
+
+  /* 5) O dropdown precisa ser overlay e não empurrar layout */
+  .lang-switcher__menu{
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    top: 100% !important;
+    width: 220px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+}
+
+
+/* ===== Mobile: compactar menu e language switcher ===== */
+@media (max-width: 520px){
+
+  /* 1) Menos gap entre itens (linha e coluna) */
+  .header-navwrap > nav.nav ul.flat{
+    gap: 6px 12px !important;           /* row-gap / column-gap */
+  }
+
+  /* 2) Links do menu menores e sem “folga” */
+  .header-navwrap > nav.nav ul.flat > li > a{
+    font-size: 14px !important;
+    padding: 4px 0 !important;          /* reduz altura/área */
+    white-space: nowrap !important;     /* não quebra “Home” */
+  }
+
+  /* 3) Language switcher menor */
+  .lang-switcher__summary{
+    padding: 4px 6px !important;
+    gap: 4px !important;
+    min-width: 64px !important;
+  }
+
+  .lang-switcher__label{
+    font-size: 12px !important;         /* EN/PT menor */
+    letter-spacing: 0 !important;
+  }
+
+  /* globo menor (o feather vira SVG depois do feather.replace()) */
+  .lang-switcher__icon svg{
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .lang-switcher__chev{
+    font-size: 11px !important;
+    line-height: 1 !important;
+  }
+}
+
+
+@media (max-width: 520px){
+  .lang-switcher__icon svg{
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .lang-switcher__icon svg *{
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+
+/* ===== Mobile: alinhar verticalmente idioma com os demais itens ===== */
+@media (max-width: 520px){
+
+  /* garante alinhamento vertical dos itens do menu */
+  .header-navwrap > nav.nav ul.flat{
+    align-items: center !important;
+  }
+
+  /* todos os <li> alinhados pelo centro */
+  .header-navwrap > nav.nav ul.flat > li{
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* normaliza altura do botão de idioma */
+  .lang-switcher__summary{
+    height: 28px !important;           /* mesma “sensação” dos links */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* evita diferença de baseline do texto EN/PT */
+  .lang-switcher__label{
+    line-height: 1 !important;
+  }
+}
+
+
+/* ===== Extra small (iPhone SE ~375px): compactar mais ===== */
+@media (max-width: 390px){
+
+  /* menu mais compacto */
+  .header-navwrap > nav.nav ul.flat{
+    gap: 4px 10px !important;
+  }
+
+  .header-navwrap > nav.nav ul.flat > li > a{
+    font-size: 13px !important;
+    padding: 3px 0 !important;
+  }
+
+  /* switcher menor, mas mantendo EN/PT visível */
+  .lang-switcher__summary{
+    height: 26px !important;
+    padding: 3px 5px !important;
+    gap: 4px !important;
+    min-width: 58px !important;
+  }
+
+  .lang-switcher__label{
+    font-size: 11px !important;
+  }
+
+  .lang-switcher__icon svg{
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .lang-switcher__chev{
+    font-size: 10px !important;
+  }
+}
+
+
+@media (max-width: 390px){
+  .header-navwrap > nav.nav ul.flat > li > a[href*="tags"]{
+    letter-spacing: -0.8px;
+  }
+}
+
+
+/* ===== iPhone SE: dropdown do idioma não pode ser cortado / ficar atrás ===== */
+@media (max-width: 390px){
+
+  /* 1) Evita clipping do dropdown */
+  .header,
+  .header-navwrap,
+  nav.nav,
+  nav.nav ul.flat{
+    overflow: visible !important;
+  }
+
+  /* 2) Sobe o componente acima do header/content */
+  li.nav-lang,
+  details.lang-switcher__details{
+    position: relative !important;
+    z-index: 9999 !important;
+  }
+
+  .lang-switcher__menu{
+    z-index: 10000 !important;
+  }
+
+  /* 3) Garante que o menu apareça quando aberto */
+  details.lang-switcher__details[open] > .lang-switcher__menu{
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* ===== Fix iPhone SE: mostrar todos os itens do language menu ===== */
+@media (max-width: 390px){
+
+  .lang-switcher__menu{
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 6px 0 !important;
+  }
+
+  .lang-switcher__menu li{
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .lang-switcher__menu .lang-switcher__item{
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 14px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+
