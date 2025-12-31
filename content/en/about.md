@@ -2,6 +2,7 @@
 title: "About"
 date: 2025-12-27T10:00:00
 type: "page"
+isAbout: true
 ---
 
 ### Downloads

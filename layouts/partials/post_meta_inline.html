@@ -1,4 +1,5 @@
 {{/* layouts/partials/post_meta_inline.html */}}
+{{ if not .Params.isAbout }}
 <div class="post-page__meta">
   <a class="post-page__author" href="{{ relLangURL "about/" }}">
     <img class="post-page__authorAvatar" src="{{ relURL "img/ricardo-maekawa.jpeg" }}" alt="Ricardo Maekawa" loading="lazy">
@@ -11,3 +12,4 @@
   <span class="post-page__metaSep">·</span>
   <span class="post-page__metaItem">{{ printf "%d min read" .ReadingTime }}</span>
 </div>
+{{ end }}
