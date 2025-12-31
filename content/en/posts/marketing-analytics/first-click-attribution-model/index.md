@@ -2,6 +2,7 @@
 title: "First-click attribution: the old question that never disappeared"
 date: 2025-12-27
 slug: "first-click-attribution-model"
+translationKey: "first-click-attribution-model"
 description: "Why first-click attribution is the most important model to understand SEO, discovery, and brand awareness growth."
 tags:
   - seo
@@ -11,6 +12,7 @@ tags:
   - bigquery
 images:
   - first-click-form.jpeg
+toc: "static"     # ou "floating", "both", ou "none"
 ---
 
 

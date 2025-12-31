@@ -8,12 +8,17 @@ tags:
   - ga4
   - big-query
   - attribution-modeling
+categorie:
+  - marketing
 images:
   - first-click-ga4-big-query.jpeg
 ---
 
+## Sumário 
 
-## O Primeiro Clique não vive nos relatórios padrão
+Try this example with `toc = "floating"` and `toc = "static"`!
+
+#### O Primeiro Clique não vive nos relatórios padrão
 
 A pergunta **“onde você conheceu a nossa marca?”** não desapareceu.  
 Ela apenas saiu dos formulários e foi parar nos dados brutos.

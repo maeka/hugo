@@ -2,6 +2,7 @@
 title: "Modelo de atribuição de Primeiro Clique: a velha pergunta que nunca morreu"
 date: 2025-12-27
 slug: "modelo-atribuicao-primeiro-clique"
+translationKey: "first-click-attribution-model"
 description: "Por que o modelo de Primeiro Clique é essencial para entender o papel do SEO, da descoberta e do brand awareness no crescimento."
 tags:
   - seo

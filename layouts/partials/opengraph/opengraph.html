@@ -1,0 +1,7 @@
+{{- $title := .Title | default .Site.Title -}}
+{{- $img := .Params.featured_image | default "/img/maeka_home_hero_1920x1080_with_text.png" -}}
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:image" content="{{ $img | absURL }}">
+<meta property="og:url" content="{{ .Permalink }}">

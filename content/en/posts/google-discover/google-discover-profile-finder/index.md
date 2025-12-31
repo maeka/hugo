@@ -10,6 +10,7 @@ tags:
   - streamlit
 images:
   - google-discover-profile-finder.jpeg
+toc: true
 ---
 
 

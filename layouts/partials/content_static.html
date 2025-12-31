@@ -1,8 +1,13 @@
+<!-- layouts/partials/content_static.html -->
+{{/* Parcial do conteúdo com TOC estático (ou nenhum TOC) */}}
+{{ $toc := .Params.toc | default .Site.Params.toc | default "none" }}
 <div class="post">
   {{ if eq .Section "posts" }}
     {{ partial "breadcrumbs.html" . }}
   {{ end }}
   {{ partial "post_body.html" . }}
   <!--{{ partial "author-box.html" . }}-->
+</div>
+<div class="post post-main">
   {{ partial "article_footer.html" . }}
 </div>

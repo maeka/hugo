@@ -28,3 +28,6 @@ other = "Digital communication strategist."
 
 [words_and_minutes]
 other = "{{ .Words }} words · ~{{ .Minutes }} min read"
+
+[tocTitle]
+other = "On this page"

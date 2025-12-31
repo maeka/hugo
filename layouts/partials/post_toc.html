@@ -1,9 +1,5 @@
 {{ $toc := .TableOfContents }}
-{{ if and $toc (gt (len $toc) 60) }}
-  <aside class="post-page__toc">
-    <div class="post-page__tocTitle">Contents</div>
-    <div class="post-page__tocBody">
-      {{ $toc }}
-    </div>
-  </aside>
-{{ end }}
+<aside class="toc show-on-mobile" id="static-toc">
+  <header><h3>{{ i18n "tocTitle" }}</h3></header>
+    {{ .TableOfContents }}
+</aside>
