@@ -76,6 +76,30 @@
     if (!a) return;
     close();
   });
+
+    const summary = details.querySelector(".lang-switcher__summary");
+  if (!summary) return;
+
+  function syncFixedMenu() {
+    // só precisa no mobile
+    if (!window.matchMedia("(max-width: 520px)").matches) return;
+    if (!details.hasAttribute("open")) return;
+
+    const r = summary.getBoundingClientRect();
+    const width = Math.min(240, window.innerWidth - 24);
+
+    details.style.setProperty("--langmenu-top", (r.bottom + 8) + "px");
+    details.style.setProperty("--langmenu-width", width + "px");
+    details.style.setProperty("--langmenu-left", Math.max(12, r.right - width) + "px");
+  }
+
+  // quando abre/fecha
+  details.addEventListener("toggle", syncFixedMenu);
+
+  // se rolar ou mudar tamanho enquanto aberto
+  window.addEventListener("scroll", syncFixedMenu, { passive: true });
+  window.addEventListener("resize", syncFixedMenu, { passive: true });
+
 })();
 </script>
 

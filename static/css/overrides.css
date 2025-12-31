@@ -1679,3 +1679,80 @@ html.dark .lang-switcher__menu .lang-switcher__item{
 html.dark .lang-switcher__menu .lang-switcher__item:hover{
   background: rgba(255,255,255,.08) !important;
 }
+
+/* ===== FIX Android: dropdown do idioma como overlay (não clipa no menu scrollável) ===== */
+@media (max-width: 520px){
+  details.lang-switcher__details[open] .lang-switcher__menu{
+    position: fixed !important;
+    top: var(--langmenu-top, 60px) !important;
+    left: var(--langmenu-left, 12px) !important;
+    width: var(--langmenu-width, min(240px, calc(100vw - 24px))) !important;
+    right: auto !important;
+    z-index: 99999 !important;
+  }
+}
+
+
+/* =========================================================
+   PATCH FINAL – Pixel/S20: dropdown de idioma SEM clipping e SEM colapsar itens
+   (coloque no FINAL do overrides.css)
+   ========================================================= */
+
+/* 1) Garante que o dropdown seja coluna e não herde estilos do menu principal */
+.lang-switcher__menu,
+.lang-switcher__menu > li,
+.lang-switcher__menu .lang-switcher__item{
+  white-space: normal !important;
+  float: none !important;
+}
+
+.lang-switcher__menu{
+  display: block !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 6px 0 !important;
+}
+
+.lang-switcher__menu > li{
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.lang-switcher__menu .lang-switcher__item{
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important; /* texto não quebra, mas os itens continuam em coluna */
+}
+
+/* 2) MOBILE: transformar o dropdown em overlay FIXO (ignora o overflow-x:auto do menu) */
+@media (max-width: 520px){
+
+  /* IMPORTANTÍSSIMO: essas regras antigas estavam forçando position:absolute no mobile */
+  .lang-switcher__menu{
+    position: fixed !important;
+    left: auto !important;
+    right: 12px !important;
+    top: var(--langmenu-top, 60px) !important;
+    width: min(260px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
+
+    /* não deixa cortar os itens */
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+
+    z-index: 99999 !important;
+  }
+
+  /* remove qualquer tentativa anterior de “colar” o menu dentro da caixa do details */
+  details.lang-switcher__details[open] .lang-switcher__menu{
+    position: fixed !important;
+  }
+}
+
+
+
+
+
