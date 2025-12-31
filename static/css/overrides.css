@@ -627,3 +627,391 @@ nav[aria-label="Breadcrumb"] {
 #main-content {
   margin-right: 280px; /* por exemplo, largura do TOC + espaço extra */
 }
+
+/* =========================
+   NAV – main menu + subnav categories
+   ========================= */
+/* Ensure any sticky positioning on subnav is disabled */
+.nav.nav-categories {
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  margin-top: 6px !important;
+  margin-bottom: 8px;
+  padding-top: 0 !important;
+  border-top: 0 !important;
+}
+/* Bring subnav closer to main menu */
+.nav.nav-categories ul.flat {
+  font-size: clamp(0.88em, 2.4vw, 0.98em);
+  line-height: 1.2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1em;
+  margin-top: 0;
+  padding-top: 0;
+}
+.nav.nav-categories a {
+  font-size: 0.95em;
+  line-height: 1.15;
+}
+/* Wrapper (details) spacing */
+.nav-categories__details {
+  margin-top: 6px !important;
+}
+/* Hide hamburger summary by default (desktop view shows full list) */
+.nav-categories__summary {
+  display: none;
+}
+
+/* Main menu on very small screens: horizontal scroll instead of awkward wrap */
+@media (max-width: 412px) {
+  .header .nav > ul.flat {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+  }
+  .header .nav > ul.flat li {
+    display: inline-block;
+  }
+  .header .nav > ul.flat a {
+    font-size: clamp(0.85rem, 3.6vw, 0.95rem);
+  }
+}
+
+/* Submenu (categories) collapses into hamburger below 350px */
+@media (max-width: 350px) {
+  .nav-categories__summary {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95em;
+    line-height: 1.1;
+    margin: 6px 0 0 0;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 9999px;
+    user-select: none;
+  }
+  .nav-categories__summary::-webkit-details-marker {
+    display: none;
+  }
+  .nav-categories__summary::marker {
+    content: "";
+  }
+  /* hide categories list when closed */
+  .nav-categories__details:not([open]) .nav.nav-categories {
+    display: none;
+  }
+  /* show list when open */
+  .nav-categories__details[open] .nav.nav-categories {
+    display: block;
+    margin-top: 8px !important;
+  }
+  /* allow categories to wrap into multiple lines */
+  .nav.nav-categories ul.flat {
+    flex-wrap: wrap;
+    row-gap: 0.6em;
+    column-gap: 1em;
+    padding-bottom: 0;
+    overflow: visible;
+  }
+}
+
+/* Make categories subnav scrollable (instead of wrapping) on small devices above hamburger threshold */
+@media (max-width: 412px) {
+  .nav.nav-categories ul.flat {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .nav.nav-categories ul.flat::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Logo always round (prevent oval if CSS tweaks width/height) */
+.site-brand__logo {
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* === Additional fixes === */
+/* Breadcrumbs should not be sticky/fixed */
+nav.breadcrumbs,
+.breadcrumbs,
+nav[aria-label="Breadcrumb"] {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  inset: auto !important;
+  z-index: auto !important;
+  transform: none !important;
+}
+nav.breadcrumbs,
+nav[aria-label="Breadcrumb"] {
+  position: static !important;
+}
+
+/* Footer width = header-top width (800px max) */
+.footer.wrapper {
+  max-width: var(--site-content-width, 800px) !important;
+}
+
+/* Ensure header and header-top can expand (not fixed height) */
+.header {
+  height: auto !important;
+  overflow: visible !important;
+}
+.header-top {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Remove any visual separator line on category subnav details */
+#nav-categories-details,
+#nav-categories-details .nav {
+  border-top: 0 !important;
+}
+
+
+
+@media (max-width: 570px) {
+  .site-brand__logo {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .post-card__metaTop {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1px 3px;       /* Reduz o espaço entre os elementos */
+    line-height: 0.8;   /* Reduz altura da linha */
+    margin-bottom: 0px;   /* Remove espaço extra entre as linhas */
+  }
+
+  .post-card__metaTop > * {
+    margin-bottom: 0px !important;
+  }
+
+  .post-card__metaBreak {
+    margin: 0;
+    padding: 0;
+    height: 0;
+  }
+
+  .post-card__tags {
+    margin: 30px 0px 10px 0px;;
+
+  }
+
+}
+
+/* Responsiveness tuning before hamburger menu */
+@media (max-width: 560px) {
+  .header .nav > ul.flat {
+    gap: 16px;
+  }
+  .header .nav > ul.flat a {
+    font-size: 0.75rem;
+  }
+  .header .header-logo img {
+    max-height: 42px;
+  }
+  .header .header-logo span {
+    font-size: 1rem;
+  }
+  .breadcrumbs,
+  .breadcrumbs a {
+    font-size: 0.75rem; /* ou 12px */
+    letter-spacing: -0.2px;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap; /* se usar Flexbox, ajuda a quebrar corretamente */
+    gap: 0.25rem;
+  }
+}
+
+
+
+/* Responsiveness tuning before hamburger menu */
+@media (max-width: 560px) {
+  .header .nav > ul.flat {
+    gap: 16px;
+  }
+  .header .nav > ul.flat a {
+    font-size: 0.80rem;
+  }
+  .header .header-logo img {
+    max-height: 42px;
+  }
+  .header .header-logo span {
+    font-size: 1rem;
+  }
+  .site-brand__title {
+    margin: 0;
+    line-height: 1.05;
+    font-weight: 700;
+    font-size: clamp(0.80em, 2.2vw, 12px);
+    letter-spacing: 0.01em;
+  }
+}
+
+@media (max-width: 550px) {
+  .header .nav > ul.flat {
+    gap: 16px;
+  }
+  .header .nav > ul.flat a {
+    font-size: 0.85rem;
+  }
+  .header .header-logo img {
+    max-height: 42px;
+  }
+  .header .header-logo span {
+    font-size: 1rem;
+  }
+  .site-brand__title {
+    margin: 0;
+    line-height: 1.05;
+    font-weight: 700;
+    font-size: clamp(0.85em, 2.2vw, 12px);
+    letter-spacing: 0.01em;
+  }
+}
+
+
+@media (max-width: 460px) {
+  .header .nav > ul.flat {
+    gap: 10px;
+  }
+  .header .nav > ul.flat a {
+    font-size: 0.80rem;
+  }
+  .header .header-logo img {
+    max-height: 36px;
+  }
+  .header .header-logo span {
+    font-size: 0.85rem;
+  }
+  .site-brand__title {
+    margin: 0;
+    line-height: 1.05;
+    font-weight: 700;
+    font-size: clamp(0.70em, 2.2vw, 12px);
+    letter-spacing: 0.01em;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .header .header-logo img {
+    max-height: 32px;
+  }
+  .header .header-logo span {
+    font-size: 0.50rem;
+  }
+  .header .nav > ul.flat a {
+    font-size: 0.65rem;
+  }
+  .site-brand__title {
+    margin: 0;
+    line-height: 1.05;
+    font-weight: 700;
+    font-size: 0.60rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+
+@media (max-width: 380px) {
+  .header .header-logo img {
+    max-height: 30px;
+  }
+  .header .header-logo span {
+    font-size: 0.50rem;
+  }
+  .site-brand__logo {
+    width: 30px;
+    height: 30px;
+  }
+  .site-brand__title {
+    margin: 0;
+    line-height: 1.05;
+    font-weight: 700;
+    font-size: clamp(0.5em, 2.2vw, 10px);
+    letter-spacing: 0.01em;
+  }
+}
+
+.post-card__metaTop {
+  margin-bottom: 3px; /* aumenta esse valor se quiser mais espaço */
+}
+
+.post-card__metaBottom {
+  margin-top: 15px; /* reforça o afastamento das tags */
+}
+
+.post-cards > .post-card:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
+/* Remove espaço excessivo no topo da listagem de posts */
+@media (max-width: 600px) {
+  .post-cards {
+    margin-top: 0.5rem !important; /* ou ajuste menor ainda se preferir */
+    padding-top: 0 !important;
+  }
+
+  .main {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Garante que o TOC fique alinhado com o conteúdo principal */
+.toc {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Em telas grandes, posicione o TOC flutuante dentro da grade visível */
+@media screen and (min-width: 1025px) {
+  .toc {
+    position: sticky;
+    top: 6rem; /* ajuste conforme altura do seu header */
+    align-self: start;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .post-content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .post-main {
+    flex: 1 1 auto;
+    max-width: 60ch;
+  }
+
+  .toc {
+    flex-shrink: 0;
+  }
+}

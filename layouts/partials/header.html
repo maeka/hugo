@@ -20,7 +20,7 @@
 	{{ end -}}
 
 	{{- template "_internal/schema.html" . -}}
-	{{ partial "opengraph/opengraph.html" . }}
+	{{- template "_internal/opengraph.html" . -}}
 	{{- template "_internal/twitter_cards.html" . -}}
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ .Site.BaseURL }}css/main.css" />
@@ -59,7 +59,9 @@
 	{{- range .Site.Params.customJS }}
 	<script src="{{ $.Site.BaseURL }}{{ . }}"></script>{{- end }}
 	{{- end }}
+	{{ partial "opengraph/opengraph.html" . }}
 	{{ partial "schema/schema.html" . }}
 	{{ partial "gtm_header.html" . }}
+
 
 </head>
