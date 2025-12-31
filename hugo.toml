@@ -44,6 +44,8 @@ en = "Digital communication strategist."
 
 [params]
 	subtitle = "Mess is the order you can't understand. [Ricardo Maekawa](https://www.linkedin.com/in/maeka/) has a website."
+	
+	description = "Projetos experimentais em tecnologia, SEO e automação. MAEKA LAB mistura engenharia, dados e criatividade em um laboratório digital underground."
 
 
 	customCSS = "css/overrides.css"
