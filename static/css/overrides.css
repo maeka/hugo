@@ -1015,3 +1015,36 @@ nav[aria-label="Breadcrumb"] {
     flex-shrink: 0;
   }
 }
+
+
+/* ===== STOP "menu de cima" ficar preso no scroll ===== */
+
+/* alvo exato do seu print: nav.nav (Main navigation) */
+.header-navwrap > nav.nav[aria-label="Main navigation"]{
+  position: static !important;   /* mata sticky/fixed */
+  top: auto !important;
+  inset: auto !important;
+  transform: none !important;    /* mata efeitos de "grudar" via transform */
+  z-index: auto !important;
+}
+
+/* alguns temas grudam o wrapper ao invés do nav */
+.header,
+.header-top,
+.header-navwrap{
+  position: static !important;
+  top: auto !important;
+  inset: auto !important;
+  transform: none !important;
+  z-index: auto !important;
+}
+
+/* se o tema estiver reservando espaço pro header sticky */
+body{
+  padding-top: 0 !important;
+}
+html{
+  scroll-padding-top: 0 !important;
+}
+
+
