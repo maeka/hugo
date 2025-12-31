@@ -1,6 +1,6 @@
 <!-- layouts/_default/single.html -->
 <!DOCTYPE html>
-<html lang="{{ .Lang }}">
+<html lang="{{ .Site.Language.LanguageCode | default .Lang }}">
   {{ partial "header.html" . }}
   <body>
     {{/* Definição do parâmetro `toc` do front matter, com fallback para o site */}}
