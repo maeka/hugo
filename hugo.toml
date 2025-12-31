@@ -2,7 +2,7 @@ baseURL = "https://maeka.com.br"
 languageCode = "pt"
 defaultContentLanguage = "pt"
 defaultContentLanguageInSubdir = true
-title = "MAEKA WEB STRATEGY"
+title = "MAEKA HACK LAB"
 theme = "ink-free"
 pagination.pagerSize = 5
 
