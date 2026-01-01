@@ -3,6 +3,7 @@
 <html lang="{{ .Site.Language.LanguageCode | default .Lang }}">
   {{ partial "header.html" . }}
   <body>
+    {{ partial "gtm_body.html" }}
     {{/* Definição do parâmetro `toc` do front matter, com fallback para o site */}}
     {{ $toc := .Params.toc | default .Site.Params.toc | default "none" }}
     {{/* Se toc for "floating" ou "both", usamos o layout com TOC flutuante */}}

@@ -2,6 +2,7 @@
 <html lang="{{ .Site.Language.LanguageCode | default .Lang }}">
 {{ partial "header.html" . }}
 <body>
+{{ partial "gtm_body.html" . }}
 	<div class="container wrapper tags">
 		{{ partial "head.html" . }}
 		{{ if .Site.Params.statisticsEnabled }}

@@ -22,6 +22,7 @@ copyright = "© Copyright notice"
     [languages.pt.permalinks]
       posts = "/:sections/:slug/"
 
+
   [languages.en]
     contentDir   = "content/en"
     languageName = "English"
@@ -29,6 +30,7 @@ copyright = "© Copyright notice"
 
     [languages.en.permalinks]
       posts = "/:sections/:slug/"
+
 
 
 [params.author]
@@ -88,6 +90,8 @@ en = "Digital communication strategist."
 
 	# Github base url
 	github = "https://github.com/maeka"
+
+  	gtm_id = "GTM-KMFB653Z"
 
 	# For statistics, we can compare the total word count against a book of your choice
 	statisticsEnabled = true
