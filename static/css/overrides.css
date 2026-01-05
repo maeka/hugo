@@ -1909,5 +1909,25 @@ html.dark .lang-switcher__menu .lang-switcher__item:hover{
   white-space: nowrap;
 }
 
+/* === Fix iOS “egg-shaped” author avatar === */
+.post-page__authorAvatar{
+  width: 22px !important;
+  height: 22px !important;        /* force square */
+  aspect-ratio: 1 / 1;            /* extra safety */
+  border-radius: 9999px !important;
+  object-fit: cover;
+  display: block;                 /* avoids inline-img baseline quirks */
+  flex: 0 0 22px;                 /* prevents flex stretching */
+}
+
+/* If you also show avatars in lists/cards, keep them consistent */
+.post-card__authorAvatar{
+  width: 22px !important;
+  height: 22px !important;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px !important;
+  object-fit: cover;
+  display: block;
+}
 
 
