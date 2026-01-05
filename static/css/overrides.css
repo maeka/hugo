@@ -1752,7 +1752,162 @@ html.dark .lang-switcher__menu .lang-switcher__item:hover{
   }
 }
 
+/* === Responsive fix for the post meta line (author/date/words/read time) === */
 
+/* 1) Make the meta line fluid (font + spacing) and allow wrapping nicely */
+.post-page__meta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 6px;
+
+  /* fluid font size: won’t explode on small screens */
+  font-size: clamp(12px, 2.6vw, 14px);
+  line-height: 1.25;
+}
+
+/* 2) Keep small meta pieces from breaking awkwardly */
+.post-page__metaItem,
+.post-page__metaSep{
+  white-space: nowrap;
+}
+
+/* 3) Make author block behave better (avatar + name) */
+.post-page__author{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0; /* helps flex wrapping behave */
+}
+
+.post-page__authorName{
+  /* author name can wrap if it needs to, instead of forcing overflow */
+  white-space: normal;
+}
+
+/* 4) Avatar scales down smoothly */
+.post-page__authorAvatar{
+  width: clamp(18px, 4.2vw, 22px);
+  height: clamp(18px, 4.2vw, 22px);
+}
+
+/* 5) Breakpoints: start tightening under your “527px problem” */
+@media (max-width: 527px){
+  .post-page__meta{
+    column-gap: 8px;
+    row-gap: 4px;
+    font-size: clamp(11px, 3.0vw, 13px);
+  }
+}
+
+/* 6) Very small screens: reduce noise (optional but usually helps a lot) */
+@media (max-width: 380px){
+  /* hide separators to free space */
+  .post-page__metaSep{ display: none; }
+}
+
+
+/* ===== Post page meta: stable across mobile widths ===== */
+
+.post-page__meta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start; /* IMPORTANT: avoid “floating apart” on wrap */
+  column-gap: 10px;
+  row-gap: 6px;
+
+  font-size: clamp(12px, 2.4vw, 14px);
+  line-height: 1.25;
+}
+
+/* Keep meta bits compact */
+.post-page__metaItem{ white-space: nowrap; }
+.post-page__metaSep{
+  opacity: .6;
+  white-space: nowrap;
+}
+
+/* Author behaves well in flex */
+.post-page__author{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.post-page__authorName{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Avatar scales slightly */
+.post-page__authorAvatar{
+  width: clamp(18px, 4vw, 22px) !important;
+  height: clamp(18px, 4vw, 22px) !important;
+}
+
+/* Mobile: force a clean 2-line layout
+   Line 1: author
+   Line 2: date • words • read time
+*/
+@media (max-width: 520px){
+  .post-page__meta{
+    column-gap: 8px;
+    row-gap: 4px;
+    font-size: clamp(11px, 3.0vw, 13px);
+  }
+
+  .post-page__author{
+    flex-basis: 100%;
+  }
+
+  /* separators waste width on mobile */
+  .post-page__metaSep{
+    display: none;
+  }
+}
+
+/* Very small: keep it tidy */
+@media (max-width: 390px){
+  .post-page__authorName{
+    max-width: 60vw; /* prevents name from dominating */
+  }
+}
+
+/* === HARD FIX: stop author from being pushed to the right === */
+.post-page__meta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start !important; /* overrides space-between */
+  column-gap: 10px;
+  row-gap: 6px;
+}
+
+/* If theme sets flex:1 on children, kill it */
+.post-page__meta > *{
+  flex: 0 0 auto !important;
+}
+
+/* Theme is likely doing margin-left:auto here — override it */
+.post-page__author{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Optional: keep tiny items from wrapping weirdly */
+.post-page__metaItem,
+.post-page__metaSep{
+  white-space: nowrap;
+}
 
 
 
