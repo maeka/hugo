@@ -5,7 +5,7 @@ pageRef    = '/'
 weight     = 1
 [[main]]
 identifier = 'posts'
-name       = 'Categorias'
+name       = 'Posts'
 pageRef    = '/posts'
 weight     = 2
 [[main]]

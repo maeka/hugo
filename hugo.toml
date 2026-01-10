@@ -1,6 +1,6 @@
 baseURL = "https://maeka.com.br"
-languageCode = "pt"
-defaultContentLanguage = "pt"
+languageCode = "pt-br"
+defaultContentLanguage = "pt-br"
 defaultContentLanguageInSubdir = true
 title = "MAEKA HACK LAB"
 theme = "ink-free"
@@ -14,18 +14,20 @@ copyright = "© Copyright notice"
 
 [languages]
 
-  [languages.pt]
-    contentDir   = "content/pt"
-    languageName = "Português"
+  [languages.pt-br]
+    contentDir   = "content/pt-br"
+    languageName = "Português (Brasil)"
+	languageCode = "pt-BR"
     weight       = 1
 
-    [languages.pt.permalinks]
+    [languages.pt-br.permalinks]
       posts = "/:sections/:slug/"
 
 
   [languages.en]
     contentDir   = "content/en"
     languageName = "English"
+	languageCode = "en-US"
     weight       = 2
 
     [languages.en.permalinks]
@@ -39,7 +41,7 @@ image = "/img/ricardo-maekawa.jpeg"
 avatar = "/img/ricardo-maekawa.jpeg"
 
 [params.author.bio]
-pt = "Estrategista de comunicação digital."
+pt-br = "Estrategista de comunicação digital."
 en = "Digital communication strategist."
 
 
