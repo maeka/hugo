@@ -12,6 +12,7 @@ tags:
 images:
   - seo-strategy_og_pt.png
   - seo-strategy-ricardo-maekawa-chart.jpeg
+aliases: ["/pt/posts/estrategia-seo-vs-objetivos-estrategicos"]
 ---
 
 
