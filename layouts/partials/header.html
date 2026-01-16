@@ -73,8 +73,6 @@
 	{{- range .Site.Params.customJS }}
 	<script src="{{ $.Site.BaseURL }}{{ . }}"></script>{{- end }}
 	{{- end }}
-	{{ partial "opengraph/opengraph.html" . }}
-	{{ partial "schema/schema.html" . }}
 	{{ partial "gtm_header.html" . }}
 
 
